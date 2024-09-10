@@ -1,5 +1,6 @@
 * {
     text-align: center;
+    line-height: 5px;
 }
 
 h1 {
@@ -42,4 +43,5 @@ h2 {
     font-style: italic;
     font-size: 18px;
     margin: 30px;
+    line-height: 20px;
 }

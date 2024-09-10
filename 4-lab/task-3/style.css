@@ -1,0 +1,32 @@
+a {
+    color: purple;
+}
+
+.main_a {
+    color: green;
+}
+
+.square_marker {
+    list-style-type: square;
+}
+
+.pic_marker {
+    list-style-type: none;
+    list-style-image: url('li.svg');
+}
+
+ul ul{
+    list-style: none;
+}
+
+ul .square_marker a {
+    text-decoration: none;
+}
+
+ul {
+    color: black;
+}
+
+ol {
+    padding-left: 50px;
+}
