@@ -1,0 +1,45 @@
+* {
+    text-align: center;
+}
+
+h1 {
+    color: red;
+}
+
+h2 {
+    font-style: italic;
+    line-height: 30px;
+}
+
+.span_bold {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.span_underlined {
+    text-decoration: underline;
+}
+
+.span_sub {
+    vertical-align: sub;
+    font-size: smaller;
+}
+
+.span_sup {
+    vertical-align: super;
+    font-size: smaller;
+}
+
+.span_through {
+    text-decoration: line-through;
+}
+
+#yellow_span {
+    background-color: yellow;
+}
+
+#div_italic {
+    font-style: italic;
+    font-size: 18px;
+    margin: 30px;
+}
