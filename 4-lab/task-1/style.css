@@ -1,0 +1,42 @@
+* {
+    font-family: Arial;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+
+  p {
+    color: green;
+    text-align: center;
+  }
+  
+  div {
+    text-align: justify;
+  }
+
+  .first_third_p {
+    color: red;
+  }
+
+  .no-wrap {
+    white-space: nowrap;
+  }
+
+  #second_p {
+    font-style: italic;
+    font-weight: bold;
+}
+
+  .shadow {
+    text-shadow: 5px -5px 3px blue;
+  }
+
+  .first_block {
+    text-decoration: line-through;
+    text-transform: uppercase;
+    text-indent: 50px;
+  }
+
+  .inter {
+    letter-spacing: 30px;
+    word-spacing: 50px;
+  }
