@@ -1,0 +1,96 @@
+body {
+    background-image: url("../icons/wallpaper.png");
+    background-position: center;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+h3 {
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 700;
+    padding: 20px;
+    text-align: center;
+}
+
+fieldset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: auto;
+    padding-top: 20px;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.fieldset_bg {
+    border: 5px solid #680810;
+    box-shadow: 0, 5px, 10px, 0;
+    background-color: rgb(49, 190, 131);
+}
+
+fieldset legend {
+    text-align: center;
+    padding: 20px;
+    font-size: large;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: rgb(49, 174, 190);
+    color: black;
+    text-shadow: #680810 0 1px 1px;
+}
+
+.text_style {
+    font-size: larger;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.input_large {
+    width: 80%;
+    height: 10px; 
+    padding: 10px; 
+    font-size: medium; 
+}
+
+textarea {
+    width: 80%;
+    height: 35px; 
+    padding: 10px; 
+    font-size: large; 
+}
+
+fieldset.fieldset_bg  div {
+    padding: 10px;
+}
+
+fieldset div input {
+    padding: 5px; 
+    font-size: medium;
+    font-style: italic;
+}
+
+select {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.button_align {
+    text-align: center;
+    padding: 5px;
+    margin: 20px;
+}
+
+.button_align button {
+    font-size: large;
+    font-weight: bold;
+    background-color:blanchedalmond;
+    border: #680810 solid 3px;
+    width: 23%;
+    margin: 5px;
+    padding: 5px;
+}
