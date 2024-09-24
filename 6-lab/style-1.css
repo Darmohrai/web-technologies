@@ -1,10 +1,3 @@
-/* html, body { 
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 20px;
-    justify-content: center;
-    align-items: center;
- } */
 
 html, body { margin: 0; padding: 0; height: 100%; }
 
@@ -58,12 +51,29 @@ header{
     font-size: larger;
 }
 
-.main_part {
-    align-items: center;
+
+
+
+main div {
+    padding: 20px;
+    margin-top: 30px;
 }
 
-.main_part > img {
-    display: block;
-    margin: 20px auto;
-    max-width: 100%;
+.column {
+    column-count: 3;
+    column-gap: 35px;
+    column-rule: 5px dashed red;
+    column-width: 100px;
+}
+
+main img.right {
+    width: 200px;
+    float: right;
+    margin: 20px;
+}
+
+main img.left {
+    width: 200px;
+    float: left;
+    margin: 20px;
 }
