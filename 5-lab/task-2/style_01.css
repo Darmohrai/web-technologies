@@ -1,0 +1,36 @@
+*{
+    box-sizing: border-box;
+}
+td,th{
+    text-align: center;
+    padding: 25px 25px;
+}
+table{
+    border-collapse: separate;
+    table-layout: fixed;
+    width: 100%;
+}
+thead > tr{
+    background: linear-gradient(to right, 
+    #d4cef5 20%, 
+    #c8c0f8 20%, #c8c0f8 40%, 
+    #b5a9fd 40%, #b5a9fd 60%, 
+    #907ff2 60%, #907ff2 80%, 
+    #735bf9 80%, #735bf9 100%);
+}
+
+tbody > tr > th{
+    background: linear-gradient(to right, 
+    #4324f2, 
+    #4324f2
+    );
+}
+tbody {
+    background: repeating-linear-gradient(
+        to bottom, 
+        #5744bd 20%,
+        #5744bd 40%,
+        #5a5aaa 40%,
+        #5a5aaa 60%
+    );
+}

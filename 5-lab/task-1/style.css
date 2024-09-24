@@ -31,7 +31,8 @@ ul {
     background-image: url("../icons/rule.svg");
     background-repeat: no-repeat;
     background-size: 45px 45px;
-    padding-left: 45px;
+    padding-left: 50px;
+    padding-right: 20px;
 }
 
 .ul_second_level {
@@ -46,6 +47,7 @@ ul {
     background-size: 45px 45px;
     margin-right: 20px;
     padding-left: 45px;
+    margin-bottom: 10px;
 }
 
 span {
