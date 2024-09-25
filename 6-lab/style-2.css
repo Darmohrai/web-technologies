@@ -1,0 +1,149 @@
+
+html, body { margin: 0; padding: 0; height: 100%; }
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+
+header{
+    position: sticky;
+    top: 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #530f53;
+    border-radius: 0 0 40px 40px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 3px 5px 2px;
+    width: 100%;
+}
+
+.logo{
+    display: inline-block;
+    padding: 15px;
+}
+
+.logo > img {
+    width: 80px;
+}
+
+.header_ul {
+    float: right;
+    list-style: none;
+    margin-left: auto;
+}
+
+.header_ul > li {
+    margin-right: 25px;
+    float: left;
+}
+
+.header_ul > li > a{
+    display: inline-block;
+    padding: 20px;
+    background-color: #851985;
+
+    color: #09c1f9;
+    text-decoration: none;
+    cursor: pointer; 
+    font-size: larger;
+}
+
+
+
+
+main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper{
+    width: 1140px;
+    margin: 100px 50px;
+    display: inline-block;
+    text-align: justify;
+    position: relative;
+}
+
+.border {
+    display: inline-block;
+    width: 300px;
+    padding: 0px;
+    margin: 50px 0px;
+    vertical-align: top;
+}
+
+.border-1 {
+    border: 5px, solid, #530f53;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.border-2 {
+    border: 5px, solid, #530f53;
+    border-radius: 80px 0px;
+    padding: 5px;
+}
+
+.border-3 {
+    border: 5px solid #530f53;
+    border-radius: 60px 150px;
+    padding: 5px;
+}
+
+.border-4 {
+    border: 25px solid;
+    border-color: #530f53 #851985;
+    border-radius: 100px / 40px;
+    padding: 5px;
+}
+
+.border-5 {
+    border: 25px solid;
+    border-color: #530f53 #851985;
+    border-radius: 60% 8% / 30% 8%;
+    padding: 5px;
+}
+
+.border-6 {
+    border: 25px solid;
+    border-color: #851985 #851985 #851985 #530f53;
+    border-radius: 0% 0% 100% 0%;
+    padding: 5px;
+}
+
+.border-7 {
+    border: double #530f53 20px;
+    border-image: url("img/border-1.png") 30;
+    padding: 5px;
+}
+.border-8 {
+    border: double #530f53 20px;
+    border-image: url("img/border-1.png") 20 / 20px round;
+    padding: 5px;
+}
+.border-9 {
+    border: double #530f53 20px;
+    border-image: url("img/border-1.png") 42 / 20px round;
+    padding: 5px;
+}
+.border-10 {
+    border: double #530f53 20px;
+    border-image: url("img/border-2.png") 16 12 / 20px stretch;
+    padding: 10px;
+    margin-right: 25px;
+}
+.border-11 {
+    border: double #530f53 15px;
+    border-image: url("img/border-2.png") 9 25 / 20px round;
+    padding: 10px;
+    margin-right: 25px;
+}
+.border-12 {
+    border: double #530f53 20px;
+    border-image: url("img/border-2.png") 6 15 / 18px stretch;
+    padding: 10px;
+}

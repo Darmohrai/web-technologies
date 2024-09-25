@@ -54,10 +54,24 @@ header{
 
 
 
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper{
+    width: 1140px;
+    margin: 100px 50px;
+    display: inline-block;
+    text-align: justify;
+    position: relative;
+}
+/* 
 main div {
     padding: 20px;
     margin-top: 30px;
-}
+} */
 
 .column {
     column-count: 3;
