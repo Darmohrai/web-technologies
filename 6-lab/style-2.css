@@ -9,10 +9,12 @@ html, body { margin: 0; padding: 0; height: 100%; }
 header{
     position: sticky;
     top: 0;
+    z-index: 1000;
 }
 
 .header {
-    display: flex;
+    display: inline-block;
+    position: relative; 
     align-items: center;
     background-color: #530f53;
     border-radius: 0 0 40px 40px;
@@ -31,10 +33,13 @@ header{
 
 .header_ul {
     float: right;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    right: 10px;    
+    transform: translateY(-50%);
     list-style: none;
-    margin-left: auto;
 }
-
 .header_ul > li {
     margin-right: 25px;
     float: left;
@@ -55,17 +60,13 @@ header{
 
 
 main{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    align-items: center;
 }
 
 .wrapper{
     width: 1140px;
-    margin: 100px 50px;
-    display: inline-block;
     text-align: justify;
-    position: relative;
+    margin: 0 auto;
 }
 
 .border {
