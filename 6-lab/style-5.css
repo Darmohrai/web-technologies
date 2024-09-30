@@ -1,0 +1,152 @@
+
+html, body { margin: 0; padding: 0; height: 100%; }
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+
+header{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header {
+    display: inline-block;
+    position: relative; 
+    align-items: center;
+    background-color: #530f53;
+    border-radius: 0 0 40px 40px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 3px 5px 2px;
+    width: 100%;
+}
+
+.logo{
+    display: inline-block;
+    padding: 15px;
+}
+
+.logo > img {
+    width: 80px;
+}
+
+.header_ul {
+    float: right;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    right: 10px;    
+    transform: translateY(-50%);
+    list-style: none;
+}
+.header_ul > li {
+    margin-right: 25px;
+    float: left;
+}
+
+.header_ul > li > a{
+    display: inline-block;
+    padding: 20px;
+    background-color: #851985;
+
+    color: #09c1f9;
+    text-decoration: none;
+    cursor: pointer; 
+    font-size: larger;
+}
+
+
+
+
+main{
+    align-items: center;
+}
+
+.wrapper{
+    color: black;
+    width: 1140px;
+    margin: 0 auto;
+    justify-content: center;
+    
+}
+
+.div-block {
+    margin: 30px;
+    width: 300px;
+    height: 400px;
+    display: inline-block;
+    text-align: center;
+}
+
+.div-block-img {
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+}
+
+.div-block-p {
+    font-size: smaller;
+}
+
+
+.div-gradient-1 {
+    background: linear-gradient(to top right, green 5%, yellow 40%, blue 70%, orange 100%);
+}
+.div-gradient-2 {
+    background-image:
+        linear-gradient(45deg, green 15%, transparent 25%, transparent 75%, orange 75%, blue 100%),
+        linear-gradient(45deg, yellow 15%, transparent 25%, transparent 75%, purple 75%, orange 100%);
+    background-size: 100px 100px;
+    background-position: 0 0, 50px 50px;
+    background-repeat: repeat;
+}
+.div-gradient-3 {
+    background-image:
+        linear-gradient(to right, green 15%, transparent 50%, transparent 100%),
+        linear-gradient(to right, transparent 50%, blue 50%, yellow 100%);
+    background-size: 100px;
+    background-repeat: repeat;
+}
+.div-gradient-4 {
+    background-image:
+        linear-gradient(to left top, yellow 35%, transparent 35%, transparent 100%),
+        linear-gradient(to right bottom, orange 20%, transparent 45%, transparent 100%),
+        linear-gradient(to right top, green 25%, transparent 25%, transparent 100%),
+        linear-gradient(to left bottom, blue 15%, transparent 40%, transparent 100%);
+}
+.div-gradient-5 {
+    background: repeating-linear-gradient(
+            -190deg,
+            rgb(255 0 0 / 50%) 35px,
+            rgb(255 153 0 / 50%) 70px,
+            rgb(255 255 0 / 50%) 105px,
+            rgb(0 255 0 / 50%) 140px,
+            rgb(0 0 255 / 50%) 175px,
+            rgb(75 0 130 / 50%) 210px,
+            rgb(238 130 238 / 50%) 245px,
+            rgb(255 0 0 / 50%) 280px
+    ),
+    repeating-linear-gradient(
+            190deg,
+            rgb(255 0 0 / 50%) 30px,
+            rgb(255 153 0 / 50%) 60px,
+            rgb(255 255 0 / 50%) 90px,
+            rgb(0 255 0 / 50%) 120px,
+            rgb(0 0 255 / 50%) 150px,
+            rgb(75 0 130 / 50%) 180px,
+            rgba(255, 0, 255, 50%) 210px,
+            rgb(255 0 0 / 50%) 230px
+    ),
+    repeating-linear-gradient(
+            25deg,
+            red 50px,
+            orange 100px,
+            yellow 150px,
+            green 200px,
+            blue 250px,
+            purple 300px,
+            pink 350px,
+            red 370px
+    );
+}
