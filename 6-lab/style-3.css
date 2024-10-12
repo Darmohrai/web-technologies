@@ -56,6 +56,10 @@ header{
     font-size: larger;
 }
 
+.header-div {
+    width: 100%;
+}
+
 
 
 main{
@@ -77,19 +81,19 @@ main{
     background-color: #530f53;
     padding: 20px 60px;
     border-radius: 2em;
-    text-align: justify; /* Вирівнювання тексту */
+    text-align: justify; 
 }
 
 .secondlevel-block {
     background-color: #851985;
     border-radius: 2em;
     padding: 30px;
-    width: 42%; /* Трохи менша ширина для більших відступів */
+    width: 42%;
     display: inline-block;
     margin: 20px 0;
     box-sizing: border-box;
-    vertical-align: top; /* Вирівнювання по верхньому краю */
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Додаємо тінь для блоків */
+    vertical-align: top;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
 .secondlevel-block-margin-l {
     margin-left: 150px

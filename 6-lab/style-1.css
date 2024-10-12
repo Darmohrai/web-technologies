@@ -57,6 +57,10 @@ header{
     font-size: larger;
 }
 
+.header-div {
+    width: 100%;
+}
+
 
 
 
@@ -90,10 +94,12 @@ main img.right {
     width: 200px;
     float: right;
     margin: 20px;
+    margin-right: 0;
 }
 
 main img.left {
     width: 200px;
     float: left;
     margin: 20px;
+    margin-left: 0;
 }
