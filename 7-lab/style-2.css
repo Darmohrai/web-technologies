@@ -69,7 +69,6 @@ header{
 
 
 
-
 main {
     padding: 35px;
     text-align: center;
@@ -77,41 +76,40 @@ main {
 
 .wrapper {
     position: relative;
-    width: 600px;
+    display: inline-block;
+    width: 620px;
     margin: 0 auto;
     height: 300px;
 }
 
-.box {
-    width: 300px;
-    height: 150px;
-    position: absolute;
-    display: block;
-    text-align: center;
-    padding: 5px;
-    /* line-height: 100%; */
+.wrapper-block {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 300px;
 }
 
-.green {
-    background-color: rgb(40, 135, 40);
-    left: 0;
-    top: 35%;
-    z-index: 1;
+.wrapper-1 {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 20%;
+    top: 80%;
+    background-color: #09c1f9;
+    margin-left: 1%;
 }
 
-.blue {
-    background-color: rgb(103, 103, 226);
-    color: white;
-    right: 20px;
-    z-index: 2;
+.wrapper-2 {
+    display: inline-block;
+    position: relative;
+    visibility: hidden;
+    width: 100%;
+    height: 50%;
+    background-color: #530f53;
+    margin-bottom: 2%;
+    margin-left: 1%;
+}
+.wrapper-1:hover ~ .wrapper-2{
+    visibility: visible;
 }
 
-.top {
-    top: 0;
-    margin-bottom: 5%;
-}
-
-.bottom {
-    top: 60%;
-    margin-top: 5%;
-}
