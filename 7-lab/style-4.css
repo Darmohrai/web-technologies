@@ -171,3 +171,87 @@ header{
 .second-menu:hover .dropdown-dropdawn{
     display: inline-block;
 }
+
+.horizontal-nav a:active {
+    background-color: #851985;
+}
+
+
+
+
+.vertical-nav {
+    width: 200px;
+    position: fixed;
+    top: 220px;
+    padding: 10px;
+    background-color: #222;
+    height: 100%;
+}
+
+.vertical-menu-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vertical-icon, .vertical-menu-item {
+    margin-bottom: 10px;
+    background-color: #000;
+    border-radius: 10px 0px;
+}
+
+.vertical-icon-a, .vertical-menu-item-a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border: #530f53 solid;
+    border-radius: 10px 0px;
+}
+
+.vertical-menu-item .vertical-dropdown {
+    background-color: #333;
+    display: none;
+    position: relative;
+    width: 100%;
+    padding: 5px 0;
+}
+
+.vertical-dropdown-item {
+    border: #530f53 solid 1px;
+}
+
+.vertical-dropdown-item a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.vertical-menu-item:hover .vertical-dropdown {
+    display: block;
+}
+
+.vertical-second-menu:hover .vertical-dropdown-submenu {
+    display: block;
+}
+
+.vertical-dropdown-submenu {
+    background-color: #444;
+    display: none;
+    position: relative;
+    left: 20px;
+    padding: 0;
+}
+
+.vertical-dropdown-submenu .vertical-dropdown-item a {
+    padding-left: 30px;
+}
+
+.vertical-icon-a:hover, .vertical-menu-item-a:hover, .vertical-dropdown-item a:hover {
+    background-color: #851985;
+}
+
+.vertical-nav a:active {
+    background-color: #851985;
+}
