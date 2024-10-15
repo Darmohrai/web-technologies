@@ -57,6 +57,7 @@ header img {
 .like-button img {
     width: 20px;
     height: 20px;
+    margin-top: 5px;
 }
 
 /* Стилі для бургер-меню */
@@ -87,7 +88,7 @@ header img {
 }
 
 #burger-check::before {
-    top: 13px; /* Середня лінія */
+    top: 1px; /* Середня лінія */
 }
 
 .burger-button::after {
@@ -131,6 +132,10 @@ header img {
         transform: rotate(-45deg) translate(12px, -12px); /* Виправлено трансформацію */
     }
 
+    #burger-check:checked + .burger-button span {
+        display: none;
+    }
+
     #burger-check:checked::before {
         opacity: 0; /* Середня лінія зникає */
     }
@@ -138,6 +143,15 @@ header img {
     .button {
         width: 100%;
         margin-bottom: 10px;
+    }
+
+    .burger-button > span {
+        display: block;
+        position: absolute;
+        top: 45%;
+        width: 100%;
+        height: 4px;
+        background-color: #EEEEEE;
     }
 }
 
@@ -225,6 +239,10 @@ body {
     transition: background-color 0.3s; /* Анімація фону */
 }
 
+.button-filter {
+    max-width: fit-content;
+}
+
 /* Ефект наведення на кнопку */
 .button-body:hover {
     background-color: #555555; /* Світліший відтінок при наведенні */
@@ -257,6 +275,7 @@ body {
 
     .button-body {
         font-size: 0.9rem; /* Зменшуємо шрифт кнопки */
+        
     }
 }
 
@@ -323,7 +342,7 @@ body {
     flex-flow: column nowrap;
     align-items: center;
     text-align: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 30px;
 }
 .offer img {
@@ -422,12 +441,13 @@ body {
 .article {
     background-color: #444;
     display: flex;
-    width: 49%;
+    padding: 5px;
+    width: 45%;
     margin-bottom: 10px;
 }
 .article-image {
     margin-right: 15px;
-    width: 34.5%;
+    width: 25%;
     object-fit: cover;
 }
 .article-date {
@@ -457,7 +477,7 @@ body {
         height: auto;
     }
     .article {
-        background-color: #222831;
+        background-color: #444;
         display: flex;
         width: 100%;
         margin-bottom: 10px;
