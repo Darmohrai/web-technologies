@@ -1,0 +1,112 @@
+* {
+    color: #444;
+    font-family: "Microsoft Sans Serif", sans-serif;
+    font-weight: 500;
+}
+
+.wrapper {
+    width: 500px;
+    padding: 5px 10px;
+    background-color:#dad9d999;
+}
+
+.wrapper h1 {
+    margin: 0;
+    margin-bottom: 20px;
+    font-weight: lighter;
+}
+
+.wrapper h1 ~ p {
+    margin: 0;
+    color: #555;
+}
+
+.today {
+    display: flex;
+    flex-flow: row wrap;
+    font-weight: 400;
+    color: #555;
+    align-items: center;
+}
+
+.today-temperature {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.today-temperature img {
+    width: 120px;
+}
+
+.today-temperature p {
+    display: inline-flex;
+    font-size: 40px;
+    margin-left: 5px;
+    margin-top: 30px;
+}
+.temperature {
+    vertical-align: top;
+    color: #7f7f7f;
+    font-size: 20px;
+}
+
+.today-info {
+    margin-left: 50px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+.info-temperature {
+    font-size: 17px;
+}
+
+.today-info p {
+    margin: 0;
+    color: #7f7f7f;
+}
+
+
+
+
+
+
+
+
+.week {
+    display: flex;
+    flex-flow: column wrap;
+}
+.day {
+    display: flex;
+    box-sizing: border-box;
+    font-size: 20px;
+    padding: 0 20px;
+
+    justify-content: space-between;
+    align-items: center;
+
+    border: 1px rgba(115, 115, 115, 0.5);
+    border-style: solid none;
+}
+.day img{
+    width: 90px;
+}
+.day-name {
+    width: 15%;
+}
+.temperature-block {
+    display: flex;
+    flex-direction: column;
+    font-weight: 100;
+}
+.max-temperature {
+    color: black;
+}
+.min-temperature {
+    margin-top: 0px;
+    color: #7f7f7f;
+}
+.pollen {
+    color: #7f7f7f;
+}
