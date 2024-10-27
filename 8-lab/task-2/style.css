@@ -10,17 +10,17 @@ header {
     padding: 10px 20px;
     background-color: #333;
     color: white;
-    position: fixed; /* Фіксуємо шапку зверху */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Зробити хедер видимим над іншим контентом */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тінь для більшого контрасту */
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
 }
 
 header img {
-    width: 80px; /* Розмір логотипу */
+    width: 80px; 
 }
 
 .header-buttons-container {
@@ -60,12 +60,12 @@ header img {
     margin-top: 5px;
 }
 
-/* Стилі для бургер-меню */
+
 .burger-button {
-    display: none; /* Приховано на великих екранах */
+    display: none; 
     position: relative;
-    width: 35px; /* Розмір бургер-меню */
-    height: 30px; /* Висота бургер-меню */
+    width: 35px; 
+    height: 30px;
     cursor: pointer;
     margin-right: 10px;
 }
@@ -84,15 +84,15 @@ header img {
 }
 
 .burger-button::before {
-    top: 0; /* Верхня лінія */
+    top: 0;
 }
 
 #burger-check::before {
-    top: 1px; /* Середня лінія */
+    top: 1px; 
 }
 
 .burger-button::after {
-    bottom: 0; /* Нижня лінія */
+    bottom: 0; 
 }
 
 /* Сховати чекбокс */
@@ -103,24 +103,24 @@ header img {
 /* Адаптивність для мобільних пристроїв */
 @media (max-width: 768px) {
     .header-buttons-container {
-        display: none; /* Приховуємо меню на малих екранах */
+        display: none; 
         flex-direction: column;
         background-color: #333;
         position: absolute;
-        top: 100px; /* Зсуваємо меню ще нижче, щоб не перекривало шапку */
+        top: 100px; 
         right: 0;
         left: 0;
         padding: 20px 0;
         text-align: center;
-        z-index: 999; /* Меню завжди зверху під контентом шапки */
+        z-index: 999; 
     }
 
     #burger-check:checked + .burger-button + .header-buttons-container {
-        display: flex; /* Відображаємо меню при активному чекбоксі */
+        display: flex;
     }
 
     .burger-button {
-        display: block; /* Відображаємо бургер-кнопку на малих екранах */
+        display: block; 
     }
 
     /* Анімація при натисканні на бургер-кнопку */
@@ -137,7 +137,7 @@ header img {
     }
 
     #burger-check:checked::before {
-        opacity: 0; /* Середня лінія зникає */
+        opacity: 0; 
     }
 
     .button {
@@ -164,109 +164,117 @@ header img {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 20px; /* Відступи зверху/знизу і з боків */
+    padding: 50px 20px; 
     background-color: #444;
 }
 
 /* Блок з текстом */
 .content-box {
-    max-width: 800px; /* Ширина блоку */
+    max-width: 800px; 
     padding: 40px;
     /* background-color: #3b3b3b; Темний фон для контрасту */
-    color: #ffffff; /* Білий текст */
+    color: #ffffff; 
     text-align: center;
 }
 
 /* Заголовок слогану */
 .content-box h2 {
-    font-size: 2.5rem; /* Трохи збільшений розмір заголовку */
+    font-size: 2.5rem; 
     margin-bottom: 15px;
     line-height: 1.3;
-    color: #f0f0f0; /* Трохи світліший колір заголовку */
+    color: #f0f0f0; 
 }
 
-/* Опис під слоганом */
+
 .content-box p {
     font-size: 1.2rem;
     line-height: 1.7;
-    color: #e0e0e0; /* Світло-сірий для тексту */
-    max-width: 1050px; /* Обмежуємо ширину тексту для читабельності */
+    color: #e0e0e0; 
+    max-width: 1050px; 
     margin: 0 auto;
 }
 
-/* Додаткові стилі для адаптації */
+
 body {
     margin: 0;
-    padding-top: 70px; /* Відступ зверху для фіксованого header */
-    font-family: 'Arial', sans-serif; /* Основний шрифт */
+    padding-top: 70px; 
+    font-family: 'Arial', sans-serif; 
     box-sizing: border-box;
-    background-color: #cacaca; /* Світло-сірий фон для контенту */
+    background-color: #cacaca; 
 }
 
 
-/* Стиль для контейнера робіт */
+
 .work-box {
-    max-width: 1200px; /* Максимальна ширина контейнера */
-    margin: 40px auto; /* Центруємо контейнер */
-    padding: 40px 20px; /* Внутрішні відступи */
-    background-color: #ffffff; /* Білий фон */
-    border-radius: 10px; /* Заокруглені кути */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легка тінь */
+    max-width: 1200px; 
+    margin: 40px auto; 
+    padding: 40px 20px; 
+    background-color: #ffffff;
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
 }
 
-/* Заголовок секції */
 .work-head {
     display: flex;
-    justify-content: space-between; /* Розміщення елементів */
-    align-items: center; /* Вертикальне вирівнювання */
-    margin-bottom: 30px; /* Відступ знизу */
+    justify-content: space-between;
+    align-items: center; 
+    margin-bottom: 30px; 
 }
 
-/* Назва секції */
 .box-name {
-    font-size: 2.5rem; /* Розмір шрифту заголовка */
-    color: #333333; /* Темний колір тексту */
+    font-size: 2.5rem; 
+    color: #333333; 
 }
 
-/* Кнопка фільтрації */
 .button-body {
-    padding: 10px 20px; /* Внутрішні відступи кнопки */
-    background-color: #3b3b3b; /* Темний фон кнопки */
-    color: #ffffff; /* Білий колір тексту */
-    border: none; /* Без межі */
-    border-radius: 5px; /* Заокруглені кути */
-    cursor: pointer; /* Курсор при наведенні */
-    transition: background-color 0.3s; /* Анімація фону */
+    padding: 10px 20px; 
+    background-color: #3b3b3b; 
+    color: #ffffff; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
 }
 
 .button-filter {
     max-width: fit-content;
 }
 
-/* Ефект наведення на кнопку */
 .button-body:hover {
-    background-color: #555555; /* Світліший відтінок при наведенні */
+    background-color: #555555; 
 }
+
 
 /* Галерея */
-.gallery {
-    display: grid; /* Використовуємо сітку */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Автоматичне заповнення колонок */
-    gap: 15px; /* Відстань між зображеннями */
+.gallery-wrapper {
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+    height: 48vw;
 }
-
-/* Зображення в галереї */
 .gallery-photo {
-    width: 100%; /* Ширина зображення 100% */
-    border-radius: 8px; /* Заокруглені кути зображення */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тінь для зображення */
-    object-fit: cover; /* Збереження пропорцій зображення */
+    width: 32%;
+    height: auto;
 }
 
 /* Адаптивність для мобільних пристроїв */
 @media (max-width: 768px) {
-    .gallery {
-        grid-template-columns: repeat(2, 1fr); /* Два стовпці */
+
+    .gallery-wrapper {
+        margin-top: 20px;
+        display: flex;
+        flex-flow: row wrap;
+        align-content: space-between;
+        justify-content: space-between;
+        align-items: center;
+        height: 120vw;
+    }
+    .gallery-photo {
+        width: 49%;
+        height: auto;
     }
 
     .box-name {
@@ -280,8 +288,18 @@ body {
 }
 
 @media (max-width: 576px) {
-    .gallery {
-        grid-template-columns: 1fr; /* Один стовпець */
+    .gallery-wrapper {
+        margin-top: 20px;
+        display: flex;
+        flex-flow: column nowrap;
+        align-content: space-between;
+        justify-content: space-between;
+        align-items: center;
+        height: 450vw;
+    }
+    .gallery-photo {
+        width: 100%;
+        height: auto;
     }
 
     .box-name {
@@ -300,11 +318,10 @@ body {
     text-align: center; /* Центруємо текст */
 }
 
-/* Заголовок секції */
 .contact-section h3 {
-    font-size: 2rem; /* Розмір шрифту заголовка */
-    color: #333333; /* Темний колір тексту */
-    margin-bottom: 20px; /* Відступ знизу */
+    font-size: 2rem;
+    color: #333333; 
+    margin-bottom: 20px;
 }
 
 
@@ -495,7 +512,7 @@ body {
         height: auto;
     }
     .article {
-        background-color: #222831;
+        background-color: #444;
         display: flex;
         flex-flow: column;
         width: 80%;

@@ -1,0 +1,192 @@
+* {
+    font-family:'Times New Roman', Times, serif;
+    margin:0;
+}
+/* Загальні стилі */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+header img {
+    width: 80px; 
+}
+.header-buttons-container {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.button {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: large;
+    font-style: none;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: white;
+    color: #333;
+}
+
+.like-button {
+    padding: 6px;
+    background-color: red;
+    border: none;
+    cursor: pointer;
+}
+
+.like-button img {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+}
+
+
+.burger-button {
+    display: none; 
+    position: relative;
+    width: 35px; 
+    height: 30px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.burger-button::before,
+.burger-button::after,
+#burger-check::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 4px; /* Товстіші смуги */
+    background-color: white;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.burger-button::before {
+    top: 0;
+}
+
+#burger-check::before {
+    top: 1px; 
+}
+
+.burger-button::after {
+    bottom: 0; 
+}
+
+/* Сховати чекбокс */
+#burger-check {
+    display: none;
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+    .header-buttons-container {
+        display: none; 
+        flex-direction: column;
+        background-color: #333;
+        position: absolute;
+        top: 100px; 
+        right: 0;
+        left: 0;
+        padding: 20px 0;
+        text-align: center;
+        z-index: 999; 
+    }
+
+    #burger-check:checked + .burger-button + .header-buttons-container {
+        display: flex;
+    }
+
+    .burger-button {
+        display: block; 
+    }
+
+    /* Анімація при натисканні на бургер-кнопку */
+    #burger-check:checked + .burger-button::before {
+        transform: rotate(45deg) translate(5px, 6px); /* Виправлено трансформацію */
+    }
+
+    #burger-check:checked + .burger-button::after {
+        transform: rotate(-45deg) translate(12px, -12px); /* Виправлено трансформацію */
+    }
+
+    #burger-check:checked + .burger-button span {
+        display: none;
+    }
+
+    #burger-check:checked::before {
+        opacity: 0; 
+    }
+
+    .button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .burger-button > span {
+        display: block;
+        position: absolute;
+        top: 45%;
+        width: 100%;
+        height: 4px;
+        background-color: #EEEEEE;
+    }
+}
+
+
+
+
+main {
+    display: flex;
+    justify-self: center;
+}
+
+.grid-wrapper {
+    display: inline-grid;
+    width: 40%;
+    margin: 200px auto;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 2fr 1fr;
+    gap: 1rem;
+    
+}
+
+.gallery-photo-top{
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-photo-middle {
+    width: 100%;
+    height: 100%;
+    grid-column: 1 / 6;
+}
+
+.gallery-photo-end {
+    width: 100%;
+    height: 100%;
+}
