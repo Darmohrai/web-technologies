@@ -1,0 +1,11 @@
+header
+  img(src="../../content/img/logo1.png", alt="")
+  input#burger-check(type="checkbox")
+  label.burger-button(for="burger-check")
+    span
+  ul.header-buttons-container
+    each textli in ['Home', 'About us', 'Our works', 'Journal', 'Contact']
+      li
+        button.button.header-button= `${textli}`
+    button.button.like-button
+       img(src="../../content/img/heart-icon.svg", alt="")

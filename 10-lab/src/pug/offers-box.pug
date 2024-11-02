@@ -1,0 +1,10 @@
+.offers-box
+  h2.box-name What do we do
+  p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda beatae ea eum facere hic iusto nostrum quisquam quos sint veniam!
+  .offers-box-in
+    - imglogo = 'img/logo.png'
+    each offerItem in [{ name: 'Web design', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut deleniti impedit quod tempora veritatis voluptas?', imgSrc: 'img/logo.png', imgAlt: '' },{ name: 'Motion video', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut deleniti impedit quod tempora veritatis voluptas?', imgSrc: 'img/logo.png', imgAlt: '' },{ name: 'Print design', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut deleniti impedit quod tempora veritatis voluptas?', imgSrc: 'img/logo.png', imgAlt: '' },{ name: 'Illustration', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere fuga, laudantium molestiae natus non omnis!', imgSrc: 'img/logo.png', imgAlt: '' }]
+      .offer
+        img.offer-image(src=`../../content/${imglogo}`, alt=offerItem.imgAlt)
+        h3.offer-name= offerItem.name
+        p.offer-description= offerItem.description

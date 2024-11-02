@@ -209,25 +209,25 @@ header img {
 /* Media Query for Tablets */
 @media (max-width: 768px) {
     .container {
-        grid-template-columns: repeat(6, 1fr); /* Adjust to 6 columns on smaller screens */
-        padding: 5px; /* Adjust padding */
+        grid-template-columns: repeat(6, 1fr);
+        padding: 5px; 
     }
 
     .item {
-        font-size: 18px; /* Reduce font size for better readability */
-        padding: 15px; /* Adjust padding */
+        font-size: 18px; 
+        padding: 15px; 
     }
 }
 
 /* Media Query for Small Mobile Devices */
 @media (max-width: 480px) {
     .container {
-        grid-template-columns: repeat(4, 1fr); /* Adjust to 4 columns on very small scre*/
-        padding: 5px; /* Adjust padding */
+        grid-template-columns: repeat(4, 1fr); 
+        padding: 5px;
     }
 
     .item {
-        font-size: 16px; /* Further reduce font size */
-        padding: 10px; /* Adjust padding */
+        font-size: 16px;
+        padding: 10px;
     }
 }
