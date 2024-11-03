@@ -1,0 +1,173 @@
+@charset "UTF-8";
+html {
+  background-color: #999;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+header img {
+  width: 80px;
+}
+header .header-buttons-container {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+header .header-buttons-container .button {
+  display: inline-flex;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: large;
+  align-content: center;
+  justify-content: center;
+  text-decoration: none;
+}
+header .header-buttons-container .button:hover {
+  background-color: white;
+  color: transparent;
+}
+header .header-buttons-container .button:hover {
+  background-color: white;
+  color: #333;
+}
+header .header-buttons-container .like-button {
+  align-items: center;
+  padding: 2px 8px;
+  background-color: red;
+  border: none;
+  cursor: pointer;
+}
+header .header-buttons-container .like-button img {
+  width: 20px;
+  height: 20px;
+}
+header #burger-check {
+  display: none;
+}
+header .burger-button {
+  display: none;
+  position: relative;
+  width: 35px;
+  height: 30px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+header .burger-button::before, header .burger-button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: white;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+header .burger-button::before {
+  top: 0;
+}
+header .burger-button::after {
+  bottom: 0;
+}
+header .burger-button #burger-check:checked + .burger-button::before {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+header .burger-button #burger-check:checked + .burger-button::after {
+  transform: rotate(-45deg) translate(12px, -12px);
+}
+@media (max-width: 768px) {
+  header .header-buttons-container {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    top: 100px;
+    right: 0;
+    left: 0;
+    padding: 20px 0;
+    text-align: center;
+    z-index: 999;
+  }
+  header .header-buttons-container .button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  header #burger-check:checked + .burger-button + .header-buttons-container {
+    display: flex;
+  }
+  header #burger-check:checked + .burger-button::before {
+    transform: rotate(45deg) translate(5px, 6px); /* Виправлено трансформацію */
+  }
+  header #burger-check:checked + .burger-button::after {
+    transform: rotate(-45deg) translate(12px, -12px); /* Виправлено трансформацію */
+  }
+  header .burger-button {
+    display: block;
+  }
+  header .burger-button > span {
+    display: block;
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    height: 4px;
+    background-color: #EEEEEE;
+  }
+  header #burger-check:checked + .burger-button span {
+    display: none;
+  }
+}
+
+.container .footer, .container .ads, .container .article, .container .nav, .container .header {
+  background-color: #FFD700;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: 1fr 18fr 1fr;
+  grid-template-columns: 5fr 14fr 4fr;
+  gap: 10px; /* Відступи між елементами */
+  width: 80vw;
+  height: 120vh;
+  margin: 150px auto; /* Центрування контейнера */
+  padding: 10px; /* Відступ всередині контейнера */
+}
+.container .header {
+  grid-column: 1/4;
+}
+.container .nav {
+  grid-column: 1/2;
+  grid-row: 2/4;
+}
+.container .article {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+.container .ads {
+  grid-column: 3/4;
+  grid-row: 2/3;
+}
+.container .footer {
+  grid-column: 2/4;
+}
