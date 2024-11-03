@@ -30,6 +30,7 @@ header .header-buttons-container {
   padding: 0;
 }
 header .header-buttons-container .button {
+  display: inline-flex;
   background-color: transparent;
   color: white;
   border: 1px solid white;
@@ -38,6 +39,9 @@ header .header-buttons-container .button {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   font-size: large;
+  align-content: center;
+  justify-content: center;
+  text-decoration: none;
 }
 header .header-buttons-container .button:hover {
   background-color: white;
@@ -48,6 +52,7 @@ header .header-buttons-container .button:hover {
   color: #333;
 }
 header .header-buttons-container .like-button {
+  align-items: center;
   padding: 2px 8px;
   background-color: red;
   border: none;
@@ -56,7 +61,6 @@ header .header-buttons-container .like-button {
 header .header-buttons-container .like-button img {
   width: 20px;
   height: 20px;
-  margin-top: 5px;
 }
 header #burger-check {
   display: none;
@@ -182,6 +186,7 @@ header .burger-button #burger-check:checked + .burger-button::after {
   color: #333333;
 }
 .work-box .work-head .button-body {
+  display: inline-flex;
   background-color: #333;
   color: white;
   border: 1px solid white;
@@ -190,6 +195,8 @@ header .burger-button #burger-check:checked + .burger-button::after {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   font-size: large;
+  align-content: center;
+  justify-content: center;
 }
 .work-box .work-head .button-body:hover {
   background-color: white;
@@ -269,6 +276,7 @@ header .burger-button #burger-check:checked + .burger-button::after {
   margin-bottom: 20px;
 }
 .contact-section .button-body {
+  display: inline-flex;
   background-color: #333;
   color: white;
   border: 1px solid white;
@@ -277,6 +285,8 @@ header .burger-button #burger-check:checked + .burger-button::after {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   font-size: large;
+  align-content: center;
+  justify-content: center;
   width: 50%;
 }
 .contact-section .button-body:hover {

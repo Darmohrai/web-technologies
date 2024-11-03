@@ -1,11 +1,13 @@
+- headerli = [ { href: '../../home/home/index.html', name: 'Home' },{ href: '../../grid/task-1/grid-1.html', name: 'About us' },{ href: '../../grid/task-2/grid-2.html', name: 'Our works' },{ href: '../../grid/task-3/grid-3.html', name: 'Journal' },{ href: '../../grid/task-4/grid-4.html', name: 'Contact' } ]
+
 header
-  img(src="../../content/img/logo1.png", alt="")
+  img(src=`${basePathlogo}`, alt="")
   input#burger-check(type="checkbox")
   label.burger-button(for="burger-check")
     span
   ul.header-buttons-container
-    each textli in ['Home', 'About us', 'Our works', 'Journal', 'Contact']
+    each textli in headerli
       li
-        button.button.header-button= `${textli}`
-    button.button.like-button
-       img(src="../../content/img/heart-icon.svg", alt="")
+        a.button.header-button(href=textli.href) #{textli.name}
+    a.button.like-button
+       img(src=`${basePathlike}`, alt="")

@@ -1,0 +1,10 @@
+- const imagesTop = 5
+- const imagesEnd = 5
+
+main
+  .grid-wrapper
+    each i in [...Array(imagesTop).keys()]
+      img(src="../../../../content/img/1.jpg", alt="", class="gallery-photo-top")
+    img(src="../../../../content/img/3.jpg", alt="", class="gallery-photo-middle")
+    each i in [...Array(imagesEnd).keys()]
+      img(src="../../../../content/img/1.jpg", alt="", class="gallery-photo-end")

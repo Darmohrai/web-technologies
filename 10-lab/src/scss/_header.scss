@@ -31,7 +31,8 @@ header {
     // Button styles
     .button {
       @include button-styles($header-button-bg-color, $header-text-color);
-      
+      text-decoration: none;
+
       &:hover {
         background-color: $header-button-hover-bg-color;
         color: $header-button-hover-text-color;
@@ -39,6 +40,7 @@ header {
     }
     
     .like-button {
+      align-items: center;
       padding: 2px 8px;
       background-color: $like-button-bg-color;
       border: none;
@@ -47,7 +49,6 @@ header {
       img {
         width: 20px;
         height: 20px;
-        margin-top: 5px;
       }
     }
   }
@@ -102,7 +103,7 @@ header {
       flex-direction: column;
       background-color: $header-bg-color;
       position: absolute;
-      top: 100px; 
+      top: 100px;
       right: 0;
       left: 0;
       padding: 20px 0;
