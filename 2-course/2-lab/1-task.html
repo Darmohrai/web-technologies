@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задачі на JavaScript</title>
+    <link rel="stylesheet" href="1-task.css">
+</head>
+<body>
+<h1>Виконання задач на JavaScript</h1>
+
+<section>
+    <h2>Знайти мінімальне та максимальне число в масиві</h2>
+    <label for="numbers">Введіть числа через кому:</label>
+    <input type="text" id="numbers" placeholder="3, 7, 1, 9, 5">
+    <button onclick="handleMinMax()">Показати мінімум та максимум</button>
+    <p id="minMaxResult"></p>
+</section>
+
+<section>
+    <h2>Порівняти об'єкти</h2>
+    <label for="name1">Ім'я студента 1:</label>
+    <input type="text" id="name1" placeholder="Олександр">
+    <label for="age1">Вік студента 1:</label>
+    <input type="number" id="age1" placeholder="20">
+    <label for="name2">Ім'я студента 2:</label>
+    <input type="text" id="name2" placeholder="Олександр">
+    <label for="age2">Вік студента 2:</label>
+    <input type="number" id="age2" placeholder="20">
+    <button onclick="handleObjectComparison()">Порівняти об'єкти</button>
+    <p id="objectComparisonResult"></p>
+</section>
+
+<script src="1-task.js"></script>
+</body>
+</html>
