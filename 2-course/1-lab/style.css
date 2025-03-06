@@ -1,0 +1,62 @@
+body {
+    background: linear-gradient(135deg, #dfe9f3, #ffffff);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.message-box {
+    background: #ffffff;
+    border: 2px solid #4caf50;
+    border-radius: 12px;
+    padding: 20px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #388e3c;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+button {
+    background: linear-gradient(135deg, #4caf50, #388e3c);
+    color: #ffffff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+    transform: scale(1.1);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 600px) {
+    .message-box {
+        font-size: 20px;
+        padding: 15px 30px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+}
