@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffcc33, #ff6699);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 350px;
+}
+.lamp-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.lamp {
+    width: 200px;
+    height: auto;
+    transition: opacity 0.3s;
+}
+.on {
+    content: url("on.png");
+}
+.normal {
+    filter: none;
+}
+.energy {
+    filter: brightness(1.2);
+}
+.led {
+    filter: brightness(1.5);
+}
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+button, select {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+button {
+    background: #007bff;
+    color: white;
+}
+button:hover {
+    background: #0056b3;
+}
+select {
+    background: #f8f9fa;
+    color: #333;
+}

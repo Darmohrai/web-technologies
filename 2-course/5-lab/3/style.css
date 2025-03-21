@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #4CAF50;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #4CAF50;
+}
+
+.clock, .countdown, #birthdayCountdown, #monthDisplay {
+    font-size: 28px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.clock {
+    font-size: 48px;
+    color: #FF6347;
+}
+
+.blink {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { visibility: hidden; }
+}
+
+input[type="datetime-local"], input[type="month"], input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    outline: none;
+}
+
+input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="date"]:focus {
+    border-color: #FF6347;
+}
+
+#countdown, #birthdayCountdown {
+    font-size: 22px;
+    color: #FF6347;
+}
+
+#monthDisplay {
+    font-size: 20px;
+    color: #007BFF;
+}
+
+.section input[type="datetime-local"]:hover,
+.section input[type="month"]:hover,
+.section input[type="date"]:hover {
+    background-color: #e0f7fa;
+}
+
+.section div {
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

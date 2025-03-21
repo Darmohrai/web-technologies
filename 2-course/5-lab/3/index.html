@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дата та Час</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Завдання: Дата та Час</h1>
+
+    <!-- Цифровий годинник -->
+    <div class="section">
+        <h2>Цифровий годинник:</h2>
+        <div id="clock" class="clock"></div>
+    </div>
+
+    <!-- Таймер зворотного відліку -->
+    <div class="section">
+        <h2>Таймер зворотного відліку:</h2>
+        <input type="datetime-local" id="timerInput">
+        <div id="countdown"></div>
+    </div>
+
+    <!-- Календар -->
+    <div class="section">
+        <h2>Календар:</h2>
+        <input type="month" id="monthInput">
+        <div id="monthDisplay"></div>
+    </div>
+
+    <!-- День народження -->
+    <div class="section">
+        <h2>Календар дня народження:</h2>
+        <input type="date" id="birthdayInput">
+        <div id="birthdayCountdown"></div>
+    </div>
+</div>
+<script src="index.js"></script>
+</body>
+</html>
