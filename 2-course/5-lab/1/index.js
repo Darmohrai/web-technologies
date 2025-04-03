@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function setBrightness() {
         const brightness = prompt("Введіть рівень яскравості (0-100):");
         if (brightness !== null && brightness >= 0 && brightness <= 100) {
-            lamp.style.opacity = brightness / 100;
+            lamp.style.opacity = `brightness / 100`;
             resetAutoOff();
         } else {
             alert("Некоректне значення!");

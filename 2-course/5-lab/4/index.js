@@ -3,8 +3,9 @@ let orders = new Set();
 let productHistory = new WeakMap();
 let users = new WeakSet();
 
+const btnAddProduct = document.getElementById('add-product');
 
-document.getElementById('add-product').addEventListener('click', () => {
+btnAddProduct.addEventListener('click', () => {
     const name = document.getElementById('product-name').value;
     const price = parseFloat(document.getElementById('product-price').value);
     const quantity = parseInt(document.getElementById('product-quantity').value);

@@ -1,4 +1,3 @@
-// Цифровий годинник з анімацією
 function updateClock() {
     const now = new Date();
     let hours = now.getHours().toString().padStart(2, '0');
@@ -10,7 +9,6 @@ function updateClock() {
 }
 setInterval(updateClock, 1000);
 
-// Таймер зворотного відліку
 function startCountdown() {
     const targetDate = new Date(document.getElementById('timerInput').value);
     const countdownElement = document.getElementById('countdown');
@@ -34,7 +32,6 @@ function startCountdown() {
 }
 document.getElementById('timerInput').addEventListener('change', startCountdown);
 
-// Календар
 function updateCalendar() {
     const monthInput = document.getElementById('monthInput').value;
     const month = new Date(monthInput);
@@ -44,7 +41,6 @@ function updateCalendar() {
 }
 document.getElementById('monthInput').addEventListener('input', updateCalendar);
 
-// Порахуємо залишок часу до дня народження
 function calculateBirthdayCountdown() {
     const birthday = new Date(document.getElementById('birthdayInput').value);
     const now = new Date();

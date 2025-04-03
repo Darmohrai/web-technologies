@@ -5,9 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c93df1a3-3c99-4e68-bb70-df00d6237919" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/dist/css/grid/grid-1/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/dist/css/grid/grid-1/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/dist/css/grid/grid-2/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/dist/css/grid/grid-2/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/dist/css/grid/grid-3/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/dist/css/grid/grid-3/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/dist/css/grid/grid-4/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/dist/css/grid/grid-4/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/dist/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/dist/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/dist/html/home/home/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/dist/html/home/home/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/dist/html/home/home/journal-section.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/dist/html/home/home/journal-section.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/dist/html/home/home/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/dist/html/home/home/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/dist/html/home/home/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/dist/html/home/home/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/src/pug/home/home/journal-section.pug" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/src/pug/home/home/journal-section.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/src/scss/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/src/scss/_mixins.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../10-lab/src/scss/_work.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../../../10-lab/src/scss/_work.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2 course/1-lab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2 course/2-lab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2 course/3-lab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3-lab/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../3-lab/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../1/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../2/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../4/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,11 +39,11 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2uVUp3koQdZqZDYa0shnzn8j7vh" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -39,7 +55,8 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/унік/web-programming/web-technologies/2-course/5-lab/3",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -67,6 +84,8 @@
       <option name="presentableId" value="Default" />
       <updated>1742333414366</updated>
       <workItem from="1742333415438" duration="1017000" />
+      <workItem from="1742551603752" duration="1531000" />
+      <workItem from="1743154721416" duration="751000" />
     </task>
     <servers />
   </component>
