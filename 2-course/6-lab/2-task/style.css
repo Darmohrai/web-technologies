@@ -1,0 +1,236 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+input[type="text"] {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    background-color: #f4f4f4;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button, select {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    border-color: #66bb6a;
+}
+
+button:hover, select:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+button:active, select:active {
+    background-color: #388e3c;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.4s ease-out;
+    flex-wrap: wrap;
+    color: #333;
+}
+
+li.completed {
+    background-color: #66bb6a;
+}
+
+li.completed span {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.completed:before {
+    content: "✔";
+    position: absolute;
+    top: 0;
+    left: -25px;
+    color: green;
+    font-size: 1.5rem;
+}
+
+li input[type="text"] {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    width: 80%;
+    height: 2rem;
+    padding: 0.5rem;
+    color: #333;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.actions button {
+    min-width: 100px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    background-color: #0277bd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.actions button:hover {
+    background-color: #01579b;
+    transform: scale(1.05);
+}
+
+.actions button:active {
+    background-color: #0288d1;
+    transform: scale(1.1);
+}
+
+.actions select {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    background-color: goldenrod;
+    width: 100%;
+    min-width: 50px;
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    form {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    input[type="text"], button, select {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .actions button {
+        flex: 1 1 auto;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    input[type="text"], button, select {
+        font-size: 0.9rem;
+    }
+
+    .actions {
+        width: 100%;
+    }
+
+    .actions button {
+        min-width: 50px;
+        padding: 0.5rem;
+    }
+}
+
+.task-enter {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.task-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
+
+.task-leave {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+}
+
+.task-leave-active {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
