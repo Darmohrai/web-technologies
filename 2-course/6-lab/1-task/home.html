@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="homeStyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Home</title>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <input type="checkbox" id="header__burger-button">
+        <label for="header__burger-button" class="header__burger-img-container">
+
+        </label>
+        <div class="header__logo-container">
+            <a class="header__logo" href="#"><img src="icons/Logo%20Vector.png" alt="logo"></a>
+        </div>
+        <div class="header__search-container">
+            <label>
+                <input class="search-container__input" placeholder="Search">
+            </label>
+        </div>
+        <nav class="header__nav-container">
+            <ul class="nav-container__list">
+                <li class="nav-container__item">
+                    <a class="nav-container__link link-active" href="#">Home</a>
+                </li>
+                <li class="nav-container__item">
+                    <a class="nav-container__link" href="#">About</a>
+                </li>
+                <li class="nav-container__item">
+                    <a class="nav-container__link" href="#">Contacts</a>
+                </li>
+                <li class="nav-container__item">
+                    <a class="nav-container__link" href="#">Blog</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="header__personal">
+            <ul class="personal__list">
+                <li class="personal__item">
+                    <a class="personal__icon-link" href="#">
+                        <img src="icons/favorite_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" class="icon-link__img" alt="like">
+                    </a>
+                </li>
+                <li class="personal__item">
+                    <a class="personal__icon-link" href="#">
+                        <img src="icons/shopping_cart_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" class="icon-link__img" alt="cart">
+                    </a>
+                </li>
+                <li class="personal__item">
+                    <a class="personal__icon-link" href="#">
+                        <img src="icons/person_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" class="icon-link__img" alt="person">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main class="main">
+        <div class="main__header">
+            <div class="main__header__overall">
+                <span id="overall"></span>
+            </div>
+            <div class="main__header__buttons">
+                <label>
+                    <select class="main__sort-btn">
+                    </select>
+                </label>
+                <label>
+                    <select class="main__filter-btn">
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="main__carts-container">
+        </div>
+        <div class="main__add-button-container">
+            <a class="main__add-button" href="#" onclick="openAddNewProductModal()">Add New Product</a>
+        </div>
+        <div class="modal__overlay" id="modal-overlay">
+            <div class="modal__container">
+                <h2 class="modal__title" id="modal-title">Cyber</h2>
+
+                <form class="modal__form" id="modal-form">
+                    <input type="hidden" id="modal-id" class="modal__input--hidden" />
+
+                    <label for="modal-name" class="modal__label">Name:</label>
+                    <input type="text" id="modal-name" class="modal__input" name="name" required minlength="2" maxlength="100" />
+
+                    <label for="modal-price" class="modal__label">Price:</label>
+                    <input type="number" id="modal-price" class="modal__input" name="price" required min="0.01" step="0.01" />
+
+                    <label for="modal-category" class="modal__label">Category:</label>
+                    <select id="modal-category" class="modal__select" name="category" required>
+
+                    </select>
+
+                    <label for="modal-img" class="modal__label">Image URL:</label>
+                    <input type="text" id="modal-img" class="modal__input" name="img" placeholder="http://example.com/image.jpg" />
+
+                    <div class="modal__buttons">
+                        <button type="submit" class="modal__button modal__button--primary"></button>
+                        <a type="submit" class="modal__button modal__button--secondary" onclick="closeModal()">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer__content-container">
+            <div class="footer__sections">
+                <div class="footer__section">
+                    <h3 class="footer__logo">Cyber</h3>
+                    <p class="footer__description">We are a residential interior design firm located in Portland. Our boutique-studio offers more than</p>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Services</h4>
+                    <ul class="footer__list">
+                        <li class="footer__item">
+                            <a class="footer__link" href="#">Bonus program</a>
+                        </li>
+                        <li class="footer__item">
+                            <a class="footer__link" href="#">Gift card</a>
+                        </li>
+                        <li class="footer__item">
+                            <a class="footer__link" href="#">Credit and payment</a>
+                        </li>
+                        <li class="footer__item">
+                            <a class="footer__link" href="#">Service Contracts</a>
+                        </li>
+                        <li class="footer__item">
+                            <a class="footer__link" href="#">Non-cash account</a>
+                        </li>
+                        <li class="footer__item">
+                            <a class="footer__link" href="#">Payment</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Assistance to the buyer</h4>
+                    <ul class="footer__list">
+                        <li class="footer__item">
+                            <a class="footer__link">Find an order</a>
+                        </li>
+                        <li class="footer__item">
+                            <a class="footer__link">Terms of delivery</a>
+                        </li>
+                        <li class="footer__item">
+                            <a class="footer__link">Exchange and return of goods</a>
+                        </li>
+                        <li class="footer__item">
+                            <a class="footer__link">Guarantee</a>
+                        </li>
+                        <li class="footer__item">
+                            <a class="footer__link">Frequently asked questions</a>
+                        </li>
+                        <li class="footer__item">
+                            <a class="footer__link">Terms of use of this site</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__social-media-container">
+                <ul class="social-media__list">
+                    <li class="social-media__item">
+                        <a class="social-media__link link-twitter"></a>
+                    </li>
+                    <li class="social-media__item">
+                        <a class="social-media__link link-facebook"></a>
+                    </li>
+                    <li class="social-media__item">
+                        <a class="social-media__link link-tik-tok"></a>
+                    </li>
+                    <li class="social-media__item">
+                        <a class="social-media__link link-instagram"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+<div id="toast-container"></div>
+<script src="homeScripts.js"></script>
+</body>
+</html>
