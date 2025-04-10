@@ -132,7 +132,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function enableEditMode(input) {
         input.readOnly = false;
         input.focus();
+        input.selectionStart = input.selectionEnd = input.value.length;
     }
+
 
     function disableEditMode(input, task) {
         input.readOnly = true;
@@ -140,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
             editTask(task.id, input.value.trim());
         }
     }
+
 
     function createActionsElement (task) {
         const actions = document.createElement('div');
@@ -156,18 +159,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return actions;
     }
 
-    function createEditButton (task) {
+    function createEditButton(task) {
         const button = document.createElement('button');
         button.textContent = 'Редагувати';
         button.onclick = (e) => {
             e.stopPropagation();
-            const newText = prompt('Редагувати завдання', task.text);
-            if (newText?.trim()) {
-                editTask(task.id, newText.trim());
-            }
+            const li = e.target.closest('li');
+            const input = li.querySelector('input[type="text"]');
+            enableEditMode(input, task);
         };
         return button;
     }
+
 
     function createDeleteButton (task) {
         const button = document.createElement('button');
