@@ -1,12 +1,13 @@
+html {
+    cursor: url("img/cursor.png"), auto;
+}
+
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     overflow: hidden;
-}
-
-.custom-cursor {
-    cursor: url("img/aim_2.png") 16 16, auto;
+    font-family: "Digital-7", serif;
 }
 
 .top-banner,
@@ -38,6 +39,30 @@ body {
     height: 100vh;
 }
 
+.death-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+
+    background: radial-gradient(
+            ellipse at center,
+            rgba(255, 0, 0, 0) 40%,
+            rgba(255, 0, 0, 0.15) 60%,
+            rgba(120, 0, 0, 0.4) 75%,
+            rgba(80, 0, 0, 0.6) 85%,
+            rgba(50, 0, 0, 0.8) 100%
+    );
+
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+
+
 .main-container {
     display: flex;
     height: 100vh;
@@ -66,6 +91,50 @@ body {
     transition: all 0.2s ease;
     text-transform: uppercase;
 }
+
+
+
+
+.next-level-btn {
+    position: fixed;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100000000;
+    background: transparent;
+    color: whitesmoke;
+    font-size: 24px;
+    font-family: Digital-7;
+    border: none;
+    cursor: pointer;
+    text-shadow: 0 0 5px black;
+    padding: 10px 20px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.next-level-btn:hover {
+    transform: translateX(-50%) scale(1.1);
+    opacity: 0.8;
+}
+
+.button-restart {
+    display: none;
+    position: fixed;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100000000;
+    background: transparent;
+    color: darkred;
+    font-size: 24px;
+    font-family: Digital-7;
+    border: none;
+    cursor: pointer;
+    text-shadow: 0 0 5px black;
+    padding: 10px 20px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
 
 
 
@@ -100,7 +169,7 @@ body {
 .nigga-level-1.__walk {
     background: url("gunman.png") 0 0;
     animation: nigga-level-1__walk 0.35s steps(3) infinite,
-                        move-to-center 5s linear forwards;
+    move-to-center-from-right 5s linear forwards;
 }
 
 .nigga-level-1.__standing {
@@ -179,12 +248,20 @@ body {
     }
 }
 
-@keyframes move-to-center {
+@keyframes move-to-center-from-right {
     from {
         right: 0;
     }
     to {
         right: calc(50% - 66.5px);
+    }
+}
+@keyframes move-to-center-from-left {
+    from {
+        left: 0;
+    }
+    to {
+        left: calc(50% - 66.5px);
     }
 }
 
@@ -215,5 +292,289 @@ body {
     }
     100%{
         transform: translateY(0px);
+    }
+}
+
+
+
+
+
+
+
+.nigga-level-2 {
+    position: absolute;
+    top: 300px;
+    height: 300px;
+    width: 130px;
+    right: -150px;
+    background: url("gunman.png") 0 -268px;
+}
+
+.nigga-level-2.__walk {
+    background: url("gunman.png") 0 -268px;
+
+}
+
+.nigga-level-2.__standing {
+    background: url("gunman.png") 0 -268px;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-2.__ready {
+    background: url("gunman.png") -402px -268px;
+    right: calc(50% - 66.5px);
+    width: 120px;
+}
+
+.nigga-level-2.__shooting { /*well well well*/
+    animation: nigga-level-2__duel 0.5s step-start;
+    animation-iteration-count: 1;
+    background-position: -625px -268px;
+    width: 110px;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-2__win { /*fcking nigger*/
+    background: url("gunman.png") -1073px 0;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-2.__leave {
+    background: url("gunman.png") -940px 0;
+    animation: nigga-level-2__leave 1s steps(3) infinite,
+    move-to-left 5s linear forwards;
+}
+
+.nigga-level-2.__death { /*ha-ha-ha*/
+    animation: nigga-level-2__death 1.5s steps(2) 1;
+    background: url("gunman.png") -948px -268px;;
+    right: calc(50% - 66.5px);
+    width: 120px;
+}
+
+
+@keyframes nigga-level-2__walk {
+    from {
+        background-position: 0 -268px;
+    }
+    to {
+        background-position: -410px -268px;
+    }
+}
+
+@keyframes nigga-level-2__duel {
+    0% {
+        background-position: -410px -268px;
+    }
+    33% {
+        background-position: -520px -268px;
+    }
+    66% {
+        background-position: -625px -268px;
+    }
+}
+
+@keyframes nigga-level-2__death {
+    from {
+        background-position: -835px -268px;
+    }
+    to {
+        background-position: -1090px -268px;
+    }
+}
+
+@keyframes nigga-level-2__leave {
+    from {
+        background-position: 0 -268px;
+    }
+    to {
+        background-position: -410px -268px;
+    }
+}
+
+
+
+
+
+
+
+.nigga-level-3 {
+    position: absolute;
+    top: 300px;
+    right: -150px;
+    height: 320px;
+    width: 110px;
+    background: url("gunman.png") 0 -578px;
+}
+
+.nigga-level-3.__walk {
+    height: 320px;
+    width: 110px;
+    background: url("gunman.png") 0 -578px;
+    animation: nigga-level-3__walk 1s steps(3) infinite;
+}
+
+.nigga-level-3.__standing {
+    background-position: 0 -578px;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-3.__ready {
+    background-position: -342px -578px;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-3.__shooting { /*well well well*/
+    animation: nigga-level-3__duel 1s step-start;
+    animation-iteration-count: 1;
+    background-position: -455px -578px;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-3__win { /*fcking nigger*/
+    background: url("gunman.png") -1073px 0;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-3.__leave {
+    background: url("gunman.png") -940px 0;
+    animation: nigga-level-3__leave 1s steps(3) infinite,
+    move-to-left 5s linear forwards;
+}
+
+.nigga-level-3.__death { /*ha-ha-ha*/
+    animation: nigga-level-3__death 0.5s steps(1);
+    background-position: -822px -578px;
+    right: calc(50% - 66.5px);
+    width: 130px;
+}
+
+@keyframes nigga-level-3__walk {
+    from {
+        background-position: 0 -578px;
+    }
+    to {
+        background-position: -330px -578px;
+    }
+}
+
+@keyframes nigga-level-3__duel {
+    0% {
+        background-position: -822px -578px;
+    }
+    33% {
+        background-position: -710px -578px;
+    }
+    66% {
+        background-position: -455px -578px;
+    }
+}
+
+@keyframes nigga-level-3__death {
+    from {
+        background-position: -690px -578px;
+    }
+    to {
+        background-position: -822px -578px;
+    }
+}
+
+@keyframes nigga-level-3__leave {
+    from {
+        background-position: 0 -578px;
+    }
+    to {
+        background-position: -330px -578px;
+    }
+}
+
+
+.nigga-level-4 {
+    position: absolute;
+    top: 300px;
+    right: -150px;
+    height: 260px;
+    width: 130px;
+    background: url("gunman.png") 0 -910px;
+}
+
+.nigga-level-4.__walk {
+    height: 260px;
+    width: 130px;
+    background: url("gunman.png") 0 -910px;
+    animation: nigga-level-3__walk 1s steps(3) infinite;
+}
+
+.nigga-level-4.__standing {
+    background-position: 0 -910px;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-4.__ready {
+    background-position: -400px -912px;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-4.__shooting { /*well well well*/
+    animation: nigga-level-4__duel 1s step-start;
+    animation-iteration-count: 1;
+    background-position: -665px -910px;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-4__win { /*fcking nigger*/
+    background: url("gunman.png") -1073px 0;
+    right: calc(50% - 66.5px);
+}
+
+.nigga-level-4.__leave {
+    background: url("gunman.png") 0 -910px;
+    animation: nigga-level-4__leave 1s steps(3) infinite,
+    move-to-left 5s linear forwards;
+}
+
+.nigga-level-4.__death { /*ha-ha-ha*/
+    animation: nigga-level-4__death 0.5s steps(1);
+    background-position: -1067px -910px;
+    width: 130px;
+    right: calc(50% - 66.5px);
+}
+
+@keyframes nigga-level-4__walk {
+    from {
+        background-position: 0 -910px;
+    }
+    to {
+        background-position: -396px -910px;
+    }
+}
+
+@keyframes nigga-level-4__duel {
+    0% {
+        background-position: -405px -910px;
+    }
+    33% {
+        background-position: -535px -910px;
+    }
+    66% {
+        background-position: -665px -910px;
+    }
+}
+
+@keyframes nigga-level-4__death {
+    from {
+        background-position: -937px -910px;
+    }
+    to {
+        background-position: -1067px -910px;
+    }
+}
+
+@keyframes nigga-level-4__leave {
+    from {
+        background-position: 0 -910px;
+    }
+    to {
+        background-position: -396px -910px;
     }
 }
