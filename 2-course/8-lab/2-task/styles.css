@@ -16,7 +16,6 @@ body {
     text-align: center;
 }
 
-/* Слайдер контейнер */
 .slider {
     position: relative;
     overflow: hidden;
@@ -27,14 +26,12 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Трек слайдів */
 .slider-track {
     display: flex;
     transition: transform 0.6s ease-in-out;
     width: 100%;
 }
 
-/* Кожен слайд */
 .slide {
     flex: 0 0 100%;
     display: flex;
@@ -44,7 +41,6 @@ body {
     position: relative;
 }
 
-/* Зображення */
 .slide img {
     max-width: 100%;
     max-height: 100%;
@@ -52,7 +48,6 @@ body {
     margin: 0 auto;
 }
 
-/* Стрілки */
 .arrow {
     position: absolute;
     top: 50%;
@@ -80,7 +75,6 @@ body {
     right: 15px;
 }
 
-/* Крапки */
 .dots {
     display: flex;
     justify-content: center;
@@ -101,7 +95,6 @@ body {
     background: #007bff;
 }
 
-/* Налаштування */
 .slider-settings {
     margin-top: 25px;
     display: flex;
@@ -116,7 +109,6 @@ body {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Стиль для чекбоксів */
 .slider-settings input[type="checkbox"] {
     appearance: none;
     width: 18px;
@@ -187,7 +179,6 @@ body {
     transform: scale(0.97);
 }
 
-/* Адаптивність */
 @media (max-width: 600px) {
     .slider {
         height: 300px;
