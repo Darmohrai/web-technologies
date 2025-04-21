@@ -1,0 +1,203 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Слайдер контейнер */
+.slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 500px;
+    border-radius: 15px;
+    background-color: #ddd;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Трек слайдів */
+.slider-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+    width: 100%;
+}
+
+/* Кожен слайд */
+.slide {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    position: relative;
+}
+
+/* Зображення */
+.slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+/* Стрілки */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 10px 16px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.arrow:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.arrow.left {
+    left: 15px;
+}
+
+.arrow.right {
+    right: 15px;
+}
+
+/* Крапки */
+.dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    gap: 10px;
+}
+
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #bbb;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dot.active {
+    background: #007bff;
+}
+
+/* Налаштування */
+.slider-settings {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Стиль для чекбоксів */
+.slider-settings input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    margin-right: 6px;
+}
+
+.slider-settings input[type="checkbox"]:checked {
+    background-color: #007bff;
+}
+
+.slider-settings input[type="checkbox"]::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    display: none;
+}
+
+.slider-settings input[type="checkbox"]:checked::after {
+    display: block;
+}
+
+/* Поле вводу */
+.slider-settings input[type="number"] {
+    padding: 6px 10px;
+    font-size: 15px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    width: 100px;
+    transition: border 0.3s;
+}
+
+.slider-settings input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Кнопка */
+#playPauseBtn {
+    padding: 8px 18px;
+    background-color: #007bff;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s;
+}
+
+#playPauseBtn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+#playPauseBtn:active {
+    transform: scale(0.97);
+}
+
+/* Адаптивність */
+@media (max-width: 600px) {
+    .slider {
+        height: 300px;
+    }
+
+    .slider-settings {
+        flex-direction: column;
+    }
+
+    #playPauseBtn {
+        width: 100%;
+    }
+}
