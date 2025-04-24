@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
+    <title>Card Game</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="intro">
+            <h1 class="intro-title">Welcome To Cards Game</h1>
+
+            <label for="difficulty">Select Difficulty:</label>
+            <select id="difficulty" class="intro-select">
+                <option value="180" selected>Easy</option>
+                <option value="120">Medium</option>
+                <option value="60">Hard</option>
+            </select>
+
+            <label for="cardQuantity">Number of Cards:</label>
+            <select id="cardQuantity" class="intro-select">
+                <option value="8" selected>4*4</option>
+                <option value="10">4*5</option>
+                <option value="12">4*6</option>
+                <option value="15">6*5</option>
+            </select>
+
+            <label for="playerMode">Players:</label>
+            <select id="playerMode" class="intro-select">
+                <option value="1" selected>1 Player</option>
+                <option value="2">2 Players</option>
+            </select>
+
+            <div id="playerInputs" class="player-inputs">
+                <input type="text" id="player1Name" placeholder="Player 1 Name" class="intro-input" required/>
+            </div>
+
+            <button id="startGameBtn" class="btn intro-btn">Start Game</button>
+            <button id="resetGameBtn" class="btn reset-btn">Reset</button>
+        </div>
+        <div class="game-container">
+            <header class="game-header">
+                <h2 class="game-header-title"></h2>
+                <h5 class="game-header-turn">Your Move</h5>
+            </header>
+            <div class="game">
+                <aside class="user-aside" id="user-aside-1">
+                </aside>
+                <div class="cards">
+                </div>
+                <aside class="user-aside" id="user-aside-2">
+                </aside>
+            </div>
+        </div>
+        <div class="result-window">
+            <div class="result-window-header">
+                <ul class="rounds">
+                </ul>
+            </div>
+            <div class="result-window-main">
+            </div>
+            <div class="result-window-footer">
+                <h2 class="result-window-footer-title"></h2>
+                <div class="btns-section">
+                    <button class="btn-restart" id="restartBtn">Restart</button>
+                    <a class="main-link">Go to Menu</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<script src="scripts.js"></script>
+<script src="usersScripts.js"></script>
+<script src="gameScripts.js"></script>
+<script src="endGameScripts.js"></script>
+</body>
+</html>
