@@ -112,7 +112,6 @@ function showErrorMessage(message) {
     }
 }
 
-
 // Handle registration form submission
 document.getElementById('registerForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -185,4 +184,70 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     } else {
         showErrorMessage("Невірні дані для авторизації.");
     }
+});
+
+document.getElementById('firstName').addEventListener('blur', () => {
+    const firstName = document.getElementById('firstName');
+    validateInput(firstName, firstName.value.length >= 3 && firstName.value.length <= 15, "Ім'я має містити від 3 до 15 символів");
+});
+
+document.getElementById('lastName').addEventListener('blur', () => {
+    const lastName = document.getElementById('lastName');
+    validateInput(lastName, lastName.value.length >= 3 && lastName.value.length <= 15, "Прізвище має містити від 3 до 15 символів");
+});
+
+document.getElementById('email').addEventListener('blur', () => {
+    const email = document.getElementById('email');
+    validateInput(email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value), "Невірний email");
+});
+
+document.getElementById('password').addEventListener('blur', () => {
+    const password = document.getElementById('password');
+    validateInput(password, password.value.length >= 6, "Пароль має містити щонайменше 6 символів");
+});
+
+document.getElementById('confirmPassword').addEventListener('blur', () => {
+    const confirmPassword = document.getElementById('confirmPassword');
+    const password = document.getElementById('password');
+    validateInput(confirmPassword, confirmPassword.value === password.value, "Паролі не співпадають");
+});
+
+document.getElementById('phone').addEventListener('blur', () => {
+    const phone = document.getElementById('phone');
+    validateInput(phone, validatePhoneNumber(phone.value), "Невірний телефон (+380...)");
+});
+
+document.getElementById('birthDate').addEventListener('blur', () => {
+    const birthDate = document.getElementById('birthDate');
+    const userBirthDate = new Date(birthDate.value);
+    const today = new Date();
+    const age = today.getFullYear() - userBirthDate.getFullYear();
+    const monthDiff = today.getMonth() - userBirthDate.getMonth();
+    const isOldEnough = age > 12 || (age === 12 && monthDiff >= 0);
+    validateInput(birthDate, userBirthDate < today && isOldEnough, "Недостатній вік або майбутня дата");
+});
+
+document.getElementById('sex').addEventListener('blur', () => {
+    const sex = document.getElementById('sex');
+    validateInput(sex, sex.value, "Оберіть стать");
+});
+
+document.getElementById('country').addEventListener('blur', () => {
+    const country = document.getElementById('country');
+    validateInput(country, country.value, "Оберіть країну");
+});
+
+document.getElementById('city').addEventListener('blur', () => {
+    const city = document.getElementById('city');
+    validateInput(city, city.value, "Оберіть місто");
+});
+
+document.getElementById('username').addEventListener('blur', () => {
+    const firstName = document.getElementById('username');
+    validateInput(firstName, firstName.value.length >= 3 && firstName.value.length <= 15, "Ім'я має містити від 3 до 15 символів");
+});
+
+document.getElementById('loginPassword').addEventListener('blur', () => {
+    const password = document.getElementById('loginPassword');
+    validateInput(password, password.value.length >= 6, "Пароль має містити щонайменше 6 символів");
 });
