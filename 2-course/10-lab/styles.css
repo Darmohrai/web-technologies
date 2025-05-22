@@ -1,0 +1,520 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    background: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #f0f0f0;
+    height: auto;
+}
+
+.body-flex {
+    display: flex;
+}
+
+.body-block {
+    display: block;
+}
+
+.container {
+    background: #1e1e2f;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 400px;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: #2c2c3a;
+    color: #ccc;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.tab-button.active {
+    background: #4ca1af;
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 2px solid #555;
+    background-color: #2c2c3a;
+    color: #f0f0f0;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #4ca1af;
+    outline: none;
+}
+
+.password-group {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #ccc;
+}
+
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.checkbox-group input {
+    width: 40px;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4ca1af;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #3b8b9f;
+}
+
+small {
+    color: #ff6b6b;
+    font-size: 12px;
+    display: none;
+    margin-top: 5px;
+}
+
+input.valid {
+    border-color: green;
+}
+
+input.invalid {
+    border-color: red;
+}
+
+.success-message,
+.error-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    padding: 20px;
+    background-color: rgba(0, 128, 0, 0.8);
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    border-radius: 10px;
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.error-message {
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+.success-message.hide,
+.error-message.hide {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+    visibility: hidden;
+}
+
+
+#people-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.person-card {
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
+    background-color: #fff;
+}
+
+.person-photo {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.person-info {
+    padding: 10px;
+}
+
+.person-nationality {
+    padding: 10px;
+    background-color: #f5f5f5;
+    text-align: center;
+    font-weight: bold;
+    color: #0066cc;
+    border-top: 1px solid #ddd;
+}
+
+
+#friend-app{
+    display: flex;
+    width: 100%;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh; /* повна висота вікна */
+    overflow: visible;
+    color: #eee;
+    width: 100%;
+}
+
+
+/* ===== Сайдбар фільтра ===== */
+.filter-sidebar {
+    width: 280px;
+    background-color: #1f1f2e; /* Темний фон для сайдбару */
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: fixed; /* фіксований зліва */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.8);
+    border-right: 1px solid #333;
+    color: #bbb;
+}
+
+.filter-sidebar h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: white;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 5px;
+}
+
+.filter-sidebar label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.filter-sidebar input[type="text"],
+.filter-sidebar input[type="number"],
+.filter-sidebar select {
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 5px;
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.filter-sidebar input[type="text"]:focus,
+.filter-sidebar input[type="number"]:focus,
+.filter-sidebar select:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+.filter-sidebar button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 10px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-sidebar button:hover {
+    background-color: #357abd;
+}
+
+.filter-sidebar input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.filter-sidebar label[for="alliesOnly"] {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+/* ===== Основний контент (персонажі) ===== */
+.main-content {
+    margin-left: 280px;
+    padding: 40px 50px;
+    /*overflow-y: auto;*/
+    flex-grow: 1;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.main-content h1 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    color: #3fa9f5;
+    text-align: center;
+}
+
+/* ===== Сітка карток персонажів ===== */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    align-items: stretch;
+    /* Зробимо так, щоб всі картки однакової висоти */
+}
+
+/* ===== Картка персонажа ===== */
+/* ===== Сітка карток персонажів ===== */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* ===== Картка персонажа ===== */
+.person-card {
+    background-color: #29294d;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(63, 169, 245, 0.4);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+    min-height: 370px;
+    cursor: pointer;
+    color: #eee;
+}
+
+.person-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(63, 169, 245, 0.7);
+}
+
+.person-photo {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 3px solid #3fa9f5;
+}
+
+.person-info {
+    padding: 16px 14px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.person-info h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #e0e0ff;
+}
+
+.person-info p {
+    font-size: 14px;
+    color: #bbb;
+    line-height: 1.3;
+    margin-bottom: 5px;
+}
+
+/* ===== Адаптив: вужчі картки після 890px ===== */
+@media (max-width: 890px) {
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 20px;
+    }
+
+    .person-card {
+        min-height: 320px;
+        width: 200px;
+    }
+
+    .person-photo {
+        height: 180px;
+    }
+
+    .person-info h3 {
+        font-size: 18px;
+    }
+
+    .person-info p {
+        font-size: 13px;
+    }
+}
+
+/* Додатковий адаптив для маленьких екранів */
+@media (max-width: 600px) {
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    .person-card {
+        min-height: 300px;
+        width: 160px;
+    }
+
+    .person-photo {
+        height: 160px;
+    }
+
+    .person-info h3 {
+        font-size: 16px;
+    }
+
+    .person-info p {
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+/* ===== Адаптив ===== */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .filter-sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+        border-right: none;
+        padding: 20px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+        height: auto !important;
+        overflow: visible;
+    }
+
+    .card-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+}
+
+.liked {
+    outline: 2px solid red;
+    background-color: #3f1463;
+}
+
+
+.page-indicator {
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+
+.page-indicator {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+    padding-bottom: 200px;
+}
+
+.page-button {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.page-button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
