@@ -2,6 +2,9 @@
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
 let isValid = true;
+let login = false;
+let register = false;
+
 
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -94,7 +97,7 @@ function showSuccessMessage(message) {
     const successMessage = document.querySelector('.success-message');
     successMessage.textContent = message;
     successMessage.style.display = 'block';
-    setTimeout(() => successMessage.style.display = 'none', 5000);
+    setTimeout(() => successMessage.style.display = 'none', 2500);
 }
 
 // Show error message
@@ -148,14 +151,20 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
     console.log(isValid);
 
     if (isValid) {
-        sendRegistration(e);
-        showSuccessMessage("Реєстрація успішна!");
-        this.reset();
-        document.querySelectorAll('input, select').forEach(input => {
-            input.classList.remove('valid', 'invalid');
-            input.parentElement.querySelector('small').style.display = 'none';
-        });
-        citySelect.disabled = true;
+        sendRegistration(e).then(() => {
+            if (!register) {
+                showErrorMessage("Будь ласка, перевірте введені дані.");
+                return;
+            }
+            showSuccessMessage("Реєстрація успішна!");
+            this.reset();
+            document.querySelectorAll('input, select').forEach(input => {
+                input.classList.remove('valid', 'invalid');
+                input.parentElement.querySelector('small').style.display = 'none';
+            });
+            citySelect.disabled = true;
+        })
+
     } else {
         showErrorMessage("Будь ласка, перевірте введені дані.");
     }
@@ -177,17 +186,36 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     if (isValid) {
         await sendLogin(e);
         const token = localStorage.getItem("token");
-        if(token == null) {
+        if (token == null) {
             showErrorMessage("Невірні дані для авторизації.");
             return;
         }
+        if (!login) return;
         showSuccessMessage("Авторизація успішна!");
         this.reset();
-        const people = await fetchPersons(1);
+        const people = [];
+        const pages = loadPagesFromUrl(); // Set of page numbers
+        console.log(Array.from(pages) + "pages");
+        if (pages.size > 0) {
+            for (const page of pages) {
+                console.log(page);
+                const persons = await fetchPersons(page); // припускаємо: fetchPersons(page) повертає масив
+                people.push(...persons); // додаємо всіх людей до масиву
+            }
+        }
+        else {
+            page = 1;
+            const persons = await fetchPersons(page); // припускаємо: fetchPersons(page) повертає масив
+            people.push(...persons);
+        }
+        console.log(people);
         showFriendSearchApp(people);
         document.querySelectorAll('input').forEach(input => {
             input.classList.remove('valid', 'invalid');
-            input.parentElement.querySelector('small').style.display = 'none';
+            const small = input.parentElement.querySelector('small');
+            if (small) {
+                small.style.display = 'none';
+            }
         });
     } else {
         showErrorMessage("Невірні дані для авторизації.");
@@ -261,11 +289,8 @@ document.getElementById('loginPassword').addEventListener('blur', () => {
 });
 
 
-
-
-
-async function sendRegistration (e) {
-    e.preventDefault(); // зупиняємо стандартну відправку
+async function sendRegistration(e) {
+    e.preventDefault();
 
     const form = e.target;
 
@@ -296,13 +321,15 @@ async function sendRegistration (e) {
 
     formData.append("personRequest", new Blob(
         [JSON.stringify(personRequest)],
-        { type: "application/json" }
+        {type: "application/json"}
     ));
 
     const photo = form.photo.files[0];
     if (photo) {
         formData.append("image", photo);
     }
+
+    register = true;
 
     try {
         const response = await fetch("http://localhost:8080/reich-media/auth/add", {
@@ -311,24 +338,28 @@ async function sendRegistration (e) {
         });
 
         if (!response.ok) {
+            register = false
             throw new Error("Помилка під час надсилання форми");
         }
 
         const result = await response.json();
+
         console.log("Успішна реєстрація:", result);
     } catch (error) {
         console.error("Помилка:", error);
+        register = false;
         showErrorMessage("Помилка реєстрації")
     }
+    console.log(register + "lallalalalalla");
 };
 
 
-async function sendLogin (event) {
-    event.preventDefault(); // блокуємо стандартну відправку
+async function sendLogin(event) {
+    event.preventDefault();
 
     const form = event.target;
     const email = form.username.value;
-    const password = (form.password.value); // бо password — Integer (якщо справді так задумано, хоча краще було б String)
+    const password = (form.password.value);
 
     const loginData = {
         email: email,
@@ -345,17 +376,23 @@ async function sendLogin (event) {
         });
 
         if (!response.ok) {
+            login = false;
             const errorText = await response.text();
             throw new Error("Помилка входу: " + errorText);
         }
 
-        const token = await response.text(); // повертається просто рядок JWT
+        const token = await response.text();
         console.log("JWT Token:", token);
-        // Зберігаємо токен у localStorage (або sessionStorage)
         localStorage.setItem("token", token);
-        // перенаправити, якщо треба:
-        // window.location.href = "/dashboard";
+        if (token) {
+            login = true;
+        }
     } catch (error) {
         console.error("Помилка логіну:", error);
+        if (error.response.status === 403) {
+            showErrorMessage("Помилка логіну: невірно введені дані")
+        } else {
+            showErrorMessage("Сталася помилка при логіні");
+        }
     }
 };

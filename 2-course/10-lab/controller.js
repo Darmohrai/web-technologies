@@ -1,32 +1,43 @@
-let allUsers = []; // збережемо всіх людей
-let likedUserIds = new Set(); // збережемо id лайкнутих
-let page = 1;
+let allUsers = [];
+let likedUserIds = new Set();
+let page = null;
 let isLoading = false;
 
 
-function showFriendSearchApp(peopleArray) {
+async function showFriendSearchApp(peopleArray) {
     hideAllContainers();
     const appContainer = createAppContainer();
     document.body.classList.add('body-block');
     document.body.classList.remove('body-flex');
     document.body.appendChild(appContainer);
 
-    renderPageButtons(page, 5);
+    renderPageButtons(page, 3);
 
-    allUsers = peopleArray; // Зберігаємо всіх користувачів
+    allUsers = peopleArray;
 
-    renderPeopleCards(allUsers);
-
-    loadFiltersFromURL();
-
-    setupFilterListener();
+    await setupFilterListener();
     setupLogoutButton();
+
+
+    const personList = document.getElementById("personList");
+    personList.style.display = 'none';
+
+    await renderPeopleCards(allUsers);
+
+    await loadFiltersFromURL();
+    updateFilterUrl();
+
+    personList.style.removeProperty('display');
+
+    window.addEventListener('scroll', throttledScrollHandler);
 }
+
 function hideAllContainers() {
     document.querySelectorAll('.container').forEach(el => {
         el.style.display = 'none';
     });
 }
+
 function createAppContainer() {
     const appContainer = document.createElement('div');
     appContainer.id = 'friend-app';
@@ -47,6 +58,7 @@ function createAppContainer() {
     `;
     return appContainer;
 }
+
 function createFilterFormHTML() {
     return `
       <form id="filterForm">
@@ -93,38 +105,47 @@ function createFilterFormHTML() {
       </form>
     `;
 }
-function setupFilterListener() {
-    document.getElementById("filterForm").addEventListener("input", applyFilters);
+
+async function setupFilterListener() {
+    document.getElementById("filterForm").addEventListener("input", await applyFilters);
 }
+
 function setupLogoutButton() {
     const btn = document.getElementById("logoutBtn");
     if (btn) {
         btn.addEventListener('click', () => {
-            // Тут логіка виходу з акаунту, очищення токена, перенаправлення і т.д.
             localStorage.removeItem("token");
-            location.reload(); // або інша логіка
+            localStorage.removeItem("likedUserIds");
         });
+        window.removeEventListener('scroll', throttledScrollHandler);
     }
 }
 
 
-
-
-
-
-
-
-
-function renderPeopleCards(people) {
+async function renderPeopleCards(people) {
     const container = document.getElementById("personList");
     container.innerHTML = "";
 
-    people.forEach(person => {
-        const card = createCard(person);
-        container.appendChild(card);
-    });
+    for (const person of people) {
+        const cardElement = await createCard(person);
+        if (cardElement) {
+            container.appendChild(cardElement);
+        }
+    }
 }
-function createCard(person) {
+
+async function renderNewPeopleCards(people) {
+    const container = document.getElementById("personList");
+
+    for (const person of people) {
+        const cardElement = await createCard(person);
+        if (cardElement) {
+            container.appendChild(cardElement);
+        }
+    }
+}
+
+async function createCard(person) {
     const imageUrl = getPersonImageUrl(person);
     const card = document.createElement("div");
     card.className = "person-card";
@@ -133,26 +154,53 @@ function createCard(person) {
         card.classList.add("liked");
     }
 
-    card.innerHTML = generatePersonCardHtml(person, imageUrl);
-    card.addEventListener('click', () => toggleLike(card, person.id));
+    try {
+        const html = await generatePersonCardHtml(person, imageUrl);
 
-    return card;
+        if (!html) {
+            showErrorMessage(`⚠️ Не вдалося створити картку для ${person.firstName} ${person.lastName}`);
+            return null;
+        }
+
+        card.innerHTML = html;
+        card.addEventListener('click', () => toggleLike(card, person.id));
+        return card;
+    } catch (error) {
+        showErrorMessage(`❌ Помилка при створенні картки: ${error.message}`);
+        return null;
+    }
 }
+
+
 function generatePersonCardHtml(person, imageUrl) {
-    return `
-        <img class="person-photo" src="${imageUrl}" alt="Фото ${person.firstName}">
-        <div class="person-info">
-            <h3>${person.firstName} ${person.lastName}</h3>
-            <p>Вік: ${person.age ?? 'Н/Д'}</p>
-            <p>Email: ${person.email ?? 'Немає'}</p>
-            <p>Національність: ${person.nationality ?? 'Невідомо'}</p>
-            <p>Звання: ${person.militaryRank ?? 'Немає'}</p>
-        </div>
-    `;
+    const token = getAuthToken();
+
+    const header = {
+        "Authorization": `Bearer ${token}`
+    };
+
+    return fetch(imageUrl, {method: "GET", headers: header})
+        .then(r => r.blob())
+        .then(blob => {
+            const imageObjectUrl = URL.createObjectURL(blob);
+            return `
+                <img class="person-photo" src="${imageObjectUrl}" alt="Фото ${person.firstName}">
+                <div class="person-info">
+                    <h3>${person.firstName} ${person.lastName}</h3>
+                    <p>Вік: ${person.age ?? 'Н/Д'}</p>
+                    <p>Email: ${person.email ?? 'Немає'}</p>
+                    <p>Національність: ${person.nationality ?? 'Невідомо'}</p>
+                    <p>Звання: ${person.militaryRank ?? 'Немає'}</p>
+                </div>
+            `;
+        });
 }
+
+
 function getPersonImageUrl(person) {
     return `http://localhost:8080${person.image.url}`;
 }
+
 function toggleLike(card, userId) {
     if (likedUserIds.has(userId)) {
         likedUserIds.delete(userId);
@@ -166,22 +214,34 @@ function toggleLike(card, userId) {
 }
 
 
-
-
-
-function applyFilters(updateUrl = true) {
+async function applyFilters(updateUrl = true) {
     const form = document.getElementById("filterForm");
     const filters = getFilterValues(form);
 
     if (updateUrl) {
-        updateFilterUrl(filters, form);
+        updateFilterUrl();
     }
 
     let filteredUsers = filterUsers(allUsers, filters);
     filteredUsers = sortUsers(filteredUsers, filters.sort);
 
-    renderPeopleCards(filteredUsers);
+    await renderPeopleCards(filteredUsers);
 }
+
+async function applyFiltersForNewPeople(updateUrl = true, newPeople) {
+    const form = document.getElementById("filterForm");
+    const filters = getFilterValues(form);
+
+    if (updateUrl) {
+        updateFilterUrl();
+    }
+
+    let filteredUsers = filterUsers(newPeople, filters);
+    filteredUsers = sortUsers(filteredUsers, filters.sort);
+
+    await renderNewPeopleCards(filteredUsers);
+}
+
 function getFilterValues(form) {
     return {
         name: form.name.value.toLowerCase(),
@@ -193,15 +253,28 @@ function getFilterValues(form) {
     };
 }
 
-function updateFilterUrl(filters, form) {
+function updateFilterUrl() {
     const params = new URLSearchParams();
+    const form = document.getElementById("filterForm");
+    const filters = getFilterValues(form);
 
-    if (filters.name) params.set("name", filters.name);
-    if (form.ageMin.value) params.set("ageMin", form.ageMin.value);
-    if (form.ageMax.value) params.set("ageMax", form.ageMax.value);
-    if (filters.nationality) params.set("nationality", filters.nationality);
-    if (filters.showAlliesOnly) params.set("alliesOnly", "1");
-    if (filters.sort) params.set("sort", filters.sort);
+    if (filters?.name) params.set("name", filters.name);
+    if (form?.ageMin.value) params.set("ageMin", form.ageMin.value);
+    if (form?.ageMax.value) params.set("ageMax", form.ageMax.value);
+    if (filters?.nationality) params.set("nationality", filters.nationality);
+    if (filters?.showAlliesOnly) params.set("alliesOnly", "1");
+    if (filters?.sort) params.set("sort", filters.sort);
+
+    let pages = new Set();
+
+    const pageButton = document.querySelectorAll('.page-button');
+    pageButton.forEach(button => {
+        if (button.classList.contains('active')) {
+            pages.add(button.textContent);
+        }
+    })
+
+    params.set("pages", Array.from(pages).join(','));
 
     history.pushState(null, "", `${location.pathname}?${params.toString()}`);
 }
@@ -231,9 +304,9 @@ function sortUsers(users, sortOption) {
         case 'age-desc':
             return users.sort((a, b) => b.age - a.age);
         case 'rank-asc':
-            return users.sort((a, b) => (a.militaryRank ?? "").localeCompare(b.militaryRank ?? ""));
+            return users.sort((a, b) => a.militaryRank - b.militaryRank);
         case 'rank-desc':
-            return users.sort((a, b) => (b.militaryRank ?? "").localeCompare(a.militaryRank ?? ""));
+            return users.sort((a, b) => b.militaryRank - a.militaryRank);
         case 'nationality-asc':
             return users.sort((a, b) => compareStrings(a.nationality ?? "", b.nationality ?? ""));
         case 'nationality-desc':
@@ -244,7 +317,7 @@ function sortUsers(users, sortOption) {
 }
 
 
-function loadFiltersFromURL() {
+async function loadFiltersFromURL() {
     const params = new URLSearchParams(window.location.search);
     const form = document.getElementById("filterForm");
 
@@ -256,18 +329,27 @@ function loadFiltersFromURL() {
     if (params.has("sort")) form.sort.value = params.get("sort");
 
     // Викликаємо applyFilters без оновлення URL повторно
-    applyFilters(false);
+    await applyFilters(false);
+}
+
+function loadPagesFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const pagesParam = params.get("pages"); // дасть "1,2"
+
+    return pagesParam
+        ? new Set(pagesParam.split(',').map(p => p.trim()).filter(p => p !== ''))
+        : new Set();
 }
 
 
+window.addEventListener("DOMContentLoaded", async () => {
 
-window.addEventListener("DOMContentLoaded", () => {
-    loadFiltersFromURL(); // перше завантаження
-    showFriendSearchApp(fetchPersons);
+    await loadFiltersFromURL(); // перше завантаження
+    await showFriendSearchApp(fetchPersons);
 
 });
-window.addEventListener("popstate", () => {
-    loadFiltersFromURL(); // повторно зчитує фільтри з нового URL
+window.addEventListener("popstate", async () => {
+    await loadFiltersFromURL(); // повторно зчитує фільтри з нового URL
 });
 
 async function fetchPersons(page) {
@@ -276,17 +358,22 @@ async function fetchPersons(page) {
     const headers = buildRequestHeaders(token);
 
     try {
-        const response = await fetch(url, { method: "GET", headers });
+        const response = await fetch(url, {method: "GET", headers});
 
         validateResponse(response);
 
         const data = await response.json();
         return Array.isArray(data) ? data : [];
     } catch (error) {
-        console.error("Не вдалося отримати людей:", error);
+        if (error?.status === 404 || error?.message?.includes?.('404')) {
+            showErrorMessage("Сторінку не знайдено (404) – помилка запиту.");
+        } else {
+            showErrorMessage("Не вдалося отримати людей – " + error.message || error);
+        }
         return [];
     }
 }
+
 function getAuthToken() {
     return localStorage.getItem("token");
 }
@@ -309,31 +396,32 @@ function validateResponse(response) {
 }
 
 
-
 document.body.addEventListener('click', (event) => {
     if (event.target.id === 'logoutBtn') {
         page = 1;
         localStorage.removeItem("token");
-        console.log(page);
         document.getElementById('friend-app').remove();
         document.querySelectorAll('.container').forEach(el => {
             el.style.display = 'block';
         });
         document.body.classList.remove('body-block');
         document.body.classList.add('body-flex');
+
     }
 });
 
 
-
 let scrollTimeout;
-window.addEventListener('scroll', throttledScrollHandler);
+
+// window.addEventListener('scroll', throttledScrollHandler);
 
 function throttledScrollHandler() {
     if (!document.getElementById('friend-app')) return;
 
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(handleScroll, 100);
+    updateFilterUrl();
+
 }
 
 async function handleScroll() {
@@ -351,19 +439,22 @@ async function handleScroll() {
 
         if (Array.isArray(people) && people.length > 0) {
             allUsers.push(...people);
-            appendPeopleCards(people);
+
+            //scrollToTopLittle();
+            await appendPeopleCards(people);
             activatePageButton(page);
         }
     } catch (err) {
-        console.error("Помилка при завантаженні сторінки:", err);
+        showErrorMessage("Помилка при завантаженні сторінки:", err)
     } finally {
         isLoading = false;
     }
+
 }
 
 function isNearBottom() {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-    return scrollTop + clientHeight >= scrollHeight - 100;
+    const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
+    return scrollTop + clientHeight >= scrollHeight - 20;
 }
 
 function shouldStopLoading(people) {
@@ -375,21 +466,23 @@ function activatePageButton(pageNumber) {
     if (button) {
         button.classList.add('active');
     }
+    updateFilterUrl();
 }
 
 
-function appendPeopleCards(newPeople) {
+async function appendPeopleCards(newPeople) {
     const container = document.getElementById("personList");
 
-    newPeople.forEach(person => {
-        const card = createPersonCard(person);
-        container.appendChild(card);
-    });
+    const cards = await Promise.all(
+        newPeople.map(person => createPersonCard(person))
+    );
 
-    applyFilters();
+    //cards.forEach(card => container.appendChild(card));
+
+    await applyFiltersForNewPeople(true, Array.from(newPeople));
 }
 
-function createPersonCard(person) {
+async function createPersonCard(person) {
     const card = document.createElement("div");
     card.className = "person-card";
 
@@ -397,14 +490,14 @@ function createPersonCard(person) {
         card.classList.add("liked");
     }
 
-    card.innerHTML = getCardHTML(person);
+    card.innerHTML = await getCardHTML(person);
 
     card.addEventListener('click', () => toggleLikedState(person.id, card));
 
     return card;
 }
 
-function getCardHTML(person) {
+async function getCardHTML(person) {
     const imageUrl = `http://localhost:8080${person.image.url}`;
     const {
         firstName,
@@ -415,16 +508,28 @@ function getCardHTML(person) {
         militaryRank
     } = person;
 
-    return `
-        <img class="person-photo" src="${imageUrl}" alt="Фото ${firstName}">
+    try {
+        const token = getAuthToken();
+
+        const header = {
+            "Authorization": `Bearer ${token}`
+        }
+        const response = await fetch(imageUrl, {method: "GET", headers: header});
+
+        return `
+        <img class="person-photo" src="${response}" alt="Фото ${firstName}">
         <div class="person-info">
             <h3>${firstName} ${lastName}</h3>
             <p>Вік: ${age ?? 'Н/Д'}</p>
             <p>Email: ${email ?? 'Немає'}</p>
-            <p>Національність: ${nationality ?? 'Невідомо'}</p>
-            <p>Звання: ${militaryRank ?? 'Немає'}</p>
+            <p>Національність: ${nationality ?? 0}</p>
+            <p>Звання: ${militaryRank ?? 0}</p>
         </div>
     `;
+    } catch (error) {
+        console.error(error);
+        showErrorMessage(error.message);
+    }
 }
 
 function toggleLikedState(userId, card) {
@@ -438,18 +543,27 @@ function toggleLikedState(userId, card) {
 }
 
 
+let firstLoad = true
 
-
-
-
-function renderPageButtons(currentPage, totalPages = 5) {
+function renderPageButtons(currentPage, totalPages = 3) {
     const container = document.getElementById('pageIndicator');
     clearContainer(container);
+    let activePages = new Set();
+    if (firstLoad) {
+        activePages = loadPagesFromUrl();
+    }
 
     for (let i = 1; i <= totalPages; i++) {
         const button = createPageButton(i, currentPage);
+        if (firstLoad) {
+            if (activePages.has(i.toString())) {
+                button.classList.add('active');
+                page = i;
+            }
+        }
         container.appendChild(button);
     }
+    firstLoad = false;
 }
 
 function clearContainer(container) {
@@ -460,6 +574,7 @@ function createPageButton(pageNumber, currentPage) {
     const button = document.createElement('button');
     button.textContent = pageNumber;
     button.classList.add('page-button');
+
     if (pageNumber === currentPage) {
         button.classList.add('active');
     }
@@ -477,30 +592,37 @@ async function onPageButtonClick(pageNumber, button) {
     try {
         const people = await fetchPersons(page);
         if (Array.isArray(people) && people.length > 0) {
-            updatePersonList(people);
-            scrollToTop();
+            const personList = document.getElementById("personList");
+            personList.style.display = "none"
+
             updateActiveButton(button);
+            updateFilterUrl();
+            await updatePersonList(people);
+
+            personList.style.removeProperty("display");
+
+            scrollToTop();
             window.addEventListener('scroll', throttledScrollHandler);
         }
     } catch (err) {
         console.error("Помилка при завантаженні сторінки:", err);
     } finally {
         isLoading = false;
-        renderPageButtons(page, totalPages);
+        renderPageButtons(page, 3);
     }
 }
 
-function updatePersonList(people) {
+async function updatePersonList(people) {
     const personList = document.getElementById("personList");
     personList.innerHTML = "";
     allUsers = [...people];
-    appendPeopleCards(people);
+    await appendPeopleCards(people);
 }
 
 function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({top: 0, behavior: 'smooth'});
     const app = document.getElementById('friend-app');
-    if (app) app.scrollTo({ top: 0, behavior: 'smooth' });
+    if (app) app.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function updateActiveButton(activeButton) {
@@ -508,4 +630,32 @@ function updateActiveButton(activeButton) {
         btn.classList.remove('active');
     });
     activeButton.classList.add('active');
+}
+
+
+function showResponseErrors(errors) {
+    if (!Array.isArray(errors)) {
+        showErrorMessage("❌ Невірний формат помилок. Спробуйте пізніше.");
+        return;
+    }
+
+    errors.forEach((error, index) => {
+        const {
+            code = "UNKNOWN_CODE",
+            message = "Сталася помилка без опису.",
+            field,
+            timestamp,
+            status
+        } = error;
+
+        let fullMessage = `🚨 Помилка #${index + 1}:\n`;
+        fullMessage += `📄 ${message}\n`;
+
+        if (field) fullMessage += `🔧 Поле: ${field}\n`;
+        if (code) fullMessage += `🆔 Код: ${code}\n`;
+        if (status !== undefined) fullMessage += `📶 Статус: ${status}\n`;
+        if (timestamp) fullMessage += `⏰ Час: ${timestamp}`;
+
+        showErrorMessage(fullMessage.trim());
+    });
 }
