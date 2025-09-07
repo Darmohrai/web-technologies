@@ -1,0 +1,16 @@
+{
+  "name": "1-lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
