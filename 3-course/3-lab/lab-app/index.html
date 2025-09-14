@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Система управління бібліотекою</title>
     <link href="libs/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="dist/styles.css">
+    <script src="dist/bundle.js"></script>
+
 </head>
 <body class="bg-light">
 
@@ -76,6 +79,7 @@
         </div>
     </div>
 
+
     <!-- Список книг -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-dark text-white">
@@ -85,8 +89,10 @@
             <ul id="booksList" class="list-group">
                 <!-- Тут динамічно зʼявлятимуться книги -->
             </ul>
+            <div id="booksPagination" class="mt-3"></div>
         </div>
     </div>
+
 
     <!-- Список користувачів -->
     <div class="card shadow-sm mb-4">

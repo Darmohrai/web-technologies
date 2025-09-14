@@ -3,6 +3,10 @@ import {Book, User} from './models';
 import {BookService, LibraryService, UserService} from './services';
 import {Validation} from "./validation";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/main.scss';
+
+
 // etc.
 class App {
     private bookService = new BookService();
@@ -198,15 +202,25 @@ class App {
     }
 
     // --- Відображення книг ---
-    private renderBooks(books?: Book[]) {
+    private currentPage = 1;
+    private itemsPerPage = 5;
+
+    private renderBooks(books: Book[] = this.bookService.getAll()) {
         const booksList = document.getElementById("booksList") as HTMLUListElement;
         booksList.innerHTML = "";
 
-        (books ?? this.bookService.getAll()).forEach(book => {
+        const totalItems = books.length;
+        const totalPages = Math.ceil(totalItems / this.itemsPerPage);
+
+        // Вираховуємо книги для поточної сторінки
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const endIndex = startIndex + this.itemsPerPage;
+        const pageBooks = books.slice(startIndex, endIndex);
+
+        pageBooks.forEach(book => {
             const li = document.createElement("li");
             li.className = "list-group-item d-flex justify-content-between align-items-center";
 
-            // назва книги
             const span = document.createElement("span");
             span.textContent = book.toString();
             li.appendChild(span);
@@ -215,28 +229,60 @@ class App {
             const btnGroup = document.createElement("div");
             btnGroup.className = "d-flex";
 
-            // Позичити / Повернути
             const borrowBtn = document.createElement("button");
             borrowBtn.className = book.isBorrowed() ? "btn btn-sm btn-warning me-2" : "btn btn-sm btn-primary me-2";
             borrowBtn.textContent = book.isBorrowed() ? "Повернути" : "Позичити";
             borrowBtn.addEventListener("click", () => this.handleBorrowReturn(book, borrowBtn));
             btnGroup.appendChild(borrowBtn);
 
-            // Видалити
             const deleteBtn = document.createElement("button");
             deleteBtn.className = "btn btn-sm btn-danger";
             deleteBtn.textContent = "Видалити";
             deleteBtn.addEventListener("click", () => {
                 this.bookService.remove(book);
                 this.renderBooks();
-                //this.showNotification(`Книга "${book.getTitle()}" видалена`, "danger");
+                this.notify(`Книга "${book.getTitle()}" видалена`, "danger");
             });
             btnGroup.appendChild(deleteBtn);
 
             li.appendChild(btnGroup);
             booksList.appendChild(li);
         });
+
+        // Рендеримо пагінацію
+        this.renderBookPagination(totalPages);
     }
+
+    private renderBookPagination(totalPages: number) {
+        const pagination = document.getElementById("booksPagination") as HTMLDivElement;
+        pagination.innerHTML = "";
+
+        if (totalPages <= 1) return; // якщо тільки 1 сторінка — не показуємо
+
+        const nav = document.createElement("nav");
+        const ul = document.createElement("ul");
+        ul.className = "pagination justify-content-center mt-3";
+
+        for (let i = 1; i <= totalPages; i++) {
+            const li = document.createElement("li");
+            li.className = `page-item ${i === this.currentPage ? "active" : ""}`;
+
+            const btn = document.createElement("button");
+            btn.className = "page-link";
+            btn.textContent = i.toString();
+            btn.addEventListener("click", () => {
+                this.currentPage = i;
+                this.renderBooks();
+            });
+
+            li.appendChild(btn);
+            ul.appendChild(li);
+        }
+
+        nav.appendChild(ul);
+        pagination.appendChild(nav);
+    }
+
 
 
     // --- Відображення користувачів ---
