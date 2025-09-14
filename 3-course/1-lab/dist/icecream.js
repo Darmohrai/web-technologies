@@ -1,7 +1,5 @@
 "use strict";
-// Function to calculate ice cream price
 function calculateIceCreamPrice() {
-    // Choose size
     let size = prompt("Choose size: small (10 UAH) or large (25 UAH)");
     let price = 0;
     if (size === "small") {
@@ -14,7 +12,6 @@ function calculateIceCreamPrice() {
         alert("Invalid size selected!");
         return;
     }
-    // Choose toppings (must be at least one)
     let toppings = prompt("Choose toppings (separated by comma): chocolate (+5), caramel (+6), berries (+10)");
     if (!toppings) {
         alert("You must choose at least one topping!");
@@ -35,12 +32,10 @@ function calculateIceCreamPrice() {
             alert(`Unknown topping: ${topping}`);
         }
     }
-    // Optional marshmallow
     let marshmallow = prompt("Do you want marshmallow? yes/no (+5 UAH)");
     if (marshmallow && marshmallow.toLowerCase() === "yes") {
         price += 5;
     }
     alert(`Your ice cream price is: ${price} UAH`);
 }
-// Run the function
 calculateIceCreamPrice();
