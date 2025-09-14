@@ -1,0 +1,25 @@
+{
+  "name": "lab-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Computer-Science-Department-ChNU/javascript-frameworks.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.2",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  }
+}
