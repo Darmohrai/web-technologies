@@ -1,0 +1,45 @@
+%style {
+    background-color: #FFD700;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 1fr 18fr 1fr;
+    grid-template-columns: 5fr 14fr 4fr;
+    gap: 10px; /* Відступи між елементами */
+    width: 80vw;
+    height: 120vh;
+    margin: 150px auto; /* Центрування контейнера */
+    padding: 10px; /* Відступ всередині контейнера */
+
+    .header {
+        grid-column: 1 / 4;
+        @extend %style;
+    }
+    
+    .nav {
+        grid-column: 1 / 2;
+        grid-row: 2 / 4;
+        @extend %style;
+    }
+    
+    .article {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+        @extend %style;
+    }
+    
+    .ads {
+        grid-column: 3 / 4;
+        grid-row: 2 / 3;
+        @extend %style;
+    }
+    
+    .footer {
+        grid-column: 2 / 4;
+        @extend %style;
+    }
+}

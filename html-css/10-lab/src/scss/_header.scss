@@ -1,0 +1,148 @@
+@import 'variables';
+@import 'mixins';
+
+// Header styles
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: $header-bg-color;
+  color: $header-text-color;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+
+  img {
+    width: 80px; 
+  }
+
+  .header-buttons-container {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    // Button styles
+    .button {
+      @include button-styles($header-button-bg-color, $header-text-color);
+      text-decoration: none;
+
+      &:hover {
+        background-color: $header-button-hover-bg-color;
+        color: $header-button-hover-text-color;
+      }
+    }
+    
+    .like-button {
+      align-items: center;
+      padding: 2px 8px;
+      background-color: $like-button-bg-color;
+      border: none;
+      cursor: pointer;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+    
+    #burger-check {
+      display: none;
+    }
+
+  .burger-button {
+    display: none; 
+    position: relative;
+    width: $burger-button-width; 
+    height: $burger-button-height;
+    cursor: pointer;
+    margin-right: 10px;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: $burger-line-height;
+      background-color: $burger-line-color;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0; 
+    }
+
+    // Animation for burger button
+    #burger-check:checked + .burger-button::before {
+      transform: rotate(45deg) translate(5px, 6px);
+    }
+
+    #burger-check:checked + .burger-button::after {
+      transform: rotate(-45deg) translate(12px, -12px);
+    }
+  }
+
+  // Responsive styles
+  @media (max-width: 768px) {
+    .header-buttons-container {
+      display: none; 
+      flex-direction: column;
+      background-color: $header-bg-color;
+      position: absolute;
+      top: 100px;
+      right: 0;
+      left: 0;
+      padding: 20px 0;
+      text-align: center;
+      z-index: 999; 
+
+      .button {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+
+    #burger-check:checked + .burger-button + .header-buttons-container {
+        display: flex;
+    }
+
+    #burger-check:checked + .burger-button::before {
+        transform: rotate(45deg) translate(5px, 6px); /* Виправлено трансформацію */
+    }
+
+    #burger-check:checked + .burger-button::after {
+        transform: rotate(-45deg) translate(12px, -12px); /* Виправлено трансформацію */
+    }
+
+    .burger-button {
+      display: block; 
+    }
+    
+    .burger-button > span {
+      display: block;
+      position: absolute;
+      top: 45%;
+      width: 100%;
+      height: $burger-line-height;
+      background-color: #EEEEEE;
+    }
+
+    #burger-check:checked + .burger-button span {
+        display: none;
+    }
+  }
+}

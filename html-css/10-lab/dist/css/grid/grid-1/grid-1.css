@@ -1,0 +1,15 @@
+.grid-wrapper {
+  display: inline-grid;
+  width: 40%;
+  margin: 200px auto;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 2fr 1fr;
+  gap: 1rem;
+}
+.grid-wrapper .gallery-photo-end, .grid-wrapper .gallery-photo-middle, .grid-wrapper .gallery-photo-top {
+  width: 100%;
+  height: 100%;
+}
+.grid-wrapper .gallery-photo-middle {
+  grid-column: 1/6;
+}

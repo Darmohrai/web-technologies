@@ -1,0 +1,95 @@
+$bg-color: #333;
+
+%button-div {
+    display: block;
+    width: 80%;
+    margin: 5% auto;               
+    padding: 3%;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #222;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+
+    &:hover {
+        background-color: $bg-color;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    &:active {
+        background-color: $bg-color;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+}
+
+%p {
+    margin: 2% 1%;                  
+    padding: 2%;
+    font-size: 1rem;                
+
+    .text-bold {
+        font-style: normal;
+    }
+}
+
+.grid-wrapper {
+    display: inline-grid;
+    width: 90%;                   
+    margin: 20% auto;               
+    grid-template-columns: 2fr repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+
+    .element-1 {
+        grid-row: 1 / 3;
+        background-color: #555;
+        padding: 2%; 
+
+        @extend %p;
+        
+        .button-div{
+            @extend %button-div; // Add button styles to element-2 as well if needed
+        }
+    }
+
+    .element-2 {
+        background-color: #555;
+        padding: 2%; 
+
+        @extend %p;
+
+        .button-div{
+            @extend %button-div; // Add button styles to element-2 as well if needed
+        }
+    }
+
+    .element-1 img, .element-2 img {
+        width: 100%;
+    }
+    
+    .element-1, .element-2 {
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+        width: 95%;               
+        gap: 0.5rem;
+    
+        .element-1, .element-2 {
+            %p {
+                font-size: 0.9rem;          /* Reduce font size */
+            }
+        
+            .button-div{
+                @extend %button-div; // Extend button styles in media query
+                width: 90%;                  // Adjust width for buttons in mobile view
+                font-size: 0.9rem;          // Adjust font size for buttons
+            }
+        }
+    }
+}

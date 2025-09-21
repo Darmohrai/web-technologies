@@ -1,0 +1,48 @@
+// @mixin button-styles($bg-color, $color) {
+//     background-color: $bg-color;
+//     color: $color;
+//     border: none;
+//     border-radius: $border-radius;
+//     padding: 10px 20px;
+//     cursor: pointer;
+//     transition: background-color 0.3s, color 0.3s;
+
+//     &:hover {
+//         background-color: $color;
+//         color: $bg-color;
+//     }
+// }
+
+@mixin button-styles($bg-color, $text-color) {
+    display: inline-flex;
+    background-color: $bg-color;
+    color: $text-color;
+    border: 1px solid $text-color;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: large;
+    align-content: center;
+    justify-content: center;
+
+    &:hover {
+        background-color: $text-color;
+        color: $bg-color;
+    }
+}
+
+// @mixin header-button-styles($bg-color, $color) {
+//     background-color: $bg-color;
+//     color: $color;
+//     border: 1px solid white;
+//     padding: 15px 30px;
+//     border-radius: $border-radius;
+//     cursor: pointer;
+//     transition: background-color 0.3s, color 0.3s;
+
+//     &:hover {
+//         background-color: $color;
+//         color: $bg-color;
+//     }
+// }

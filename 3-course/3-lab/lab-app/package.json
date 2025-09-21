@@ -6,8 +6,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --open",
-    "deploy": "gh-pages -d dist",
-    "clean-deploy-cache": "rimraf node_modules/.cache/gh-pages"
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",

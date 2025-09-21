@@ -1,0 +1,213 @@
+@charset "UTF-8";
+html {
+  background-color: #999;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+header img {
+  width: 80px;
+}
+header .header-buttons-container {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+header .header-buttons-container .button {
+  display: inline-flex;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: large;
+  align-content: center;
+  justify-content: center;
+  text-decoration: none;
+}
+header .header-buttons-container .button:hover {
+  background-color: white;
+  color: transparent;
+}
+header .header-buttons-container .button:hover {
+  background-color: white;
+  color: #333;
+}
+header .header-buttons-container .like-button {
+  align-items: center;
+  padding: 2px 8px;
+  background-color: red;
+  border: none;
+  cursor: pointer;
+}
+header .header-buttons-container .like-button img {
+  width: 20px;
+  height: 20px;
+}
+header #burger-check {
+  display: none;
+}
+header .burger-button {
+  display: none;
+  position: relative;
+  width: 35px;
+  height: 30px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+header .burger-button::before, header .burger-button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: white;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+header .burger-button::before {
+  top: 0;
+}
+header .burger-button::after {
+  bottom: 0;
+}
+header .burger-button #burger-check:checked + .burger-button::before {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+header .burger-button #burger-check:checked + .burger-button::after {
+  transform: rotate(-45deg) translate(12px, -12px);
+}
+@media (max-width: 768px) {
+  header .header-buttons-container {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    top: 100px;
+    right: 0;
+    left: 0;
+    padding: 20px 0;
+    text-align: center;
+    z-index: 999;
+  }
+  header .header-buttons-container .button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  header #burger-check:checked + .burger-button + .header-buttons-container {
+    display: flex;
+  }
+  header #burger-check:checked + .burger-button::before {
+    transform: rotate(45deg) translate(5px, 6px); /* Виправлено трансформацію */
+  }
+  header #burger-check:checked + .burger-button::after {
+    transform: rotate(-45deg) translate(12px, -12px); /* Виправлено трансформацію */
+  }
+  header .burger-button {
+    display: block;
+  }
+  header .burger-button > span {
+    display: block;
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    height: 4px;
+    background-color: #EEEEEE;
+  }
+  header #burger-check:checked + .burger-button span {
+    display: none;
+  }
+}
+
+main {
+  display: flex;
+  justify-self: center;
+}
+
+.grid-wrapper .element-2 .button-div, .grid-wrapper .element-1 .button-div {
+  display: block;
+  width: 80%;
+  margin: 5% auto;
+  padding: 3%;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #222;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+.grid-wrapper .element-2 .button-div:hover, .grid-wrapper .element-1 .button-div:hover {
+  background-color: #333;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+.grid-wrapper .element-2 .button-div:active, .grid-wrapper .element-1 .button-div:active {
+  background-color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.grid-wrapper .element-2, .grid-wrapper .element-1 {
+  margin: 2% 1%;
+  padding: 2%;
+  font-size: 1rem;
+}
+.grid-wrapper .element-2 .text-bold, .grid-wrapper .element-1 .text-bold {
+  font-style: normal;
+}
+
+.grid-wrapper {
+  display: inline-grid;
+  width: 90%;
+  margin: 20% auto;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  font-family: "Courier New", Courier, monospace;
+  color: #fff;
+}
+.grid-wrapper .element-1 {
+  grid-row: 1/3;
+  background-color: #555;
+  padding: 2%;
+}
+.grid-wrapper .element-2 {
+  background-color: #555;
+  padding: 2%;
+}
+.grid-wrapper .element-1 img, .grid-wrapper .element-2 img {
+  width: 100%;
+}
+.grid-wrapper .element-1, .grid-wrapper .element-2 {
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 768px) {
+  .grid-wrapper {
+    width: 95%;
+    gap: 0.5rem;
+  }
+  .grid-wrapper .element-1 .element-1, .grid-wrapper .element-1 .element-2, .grid-wrapper .element-2 .element-1, .grid-wrapper .element-2 .element-2 {
+    font-size: 0.9rem; /* Reduce font size */
+  }
+  .grid-wrapper .element-1 .button-div, .grid-wrapper .element-2 .button-div {
+    width: 90%;
+    font-size: 0.9rem;
+  }
+}

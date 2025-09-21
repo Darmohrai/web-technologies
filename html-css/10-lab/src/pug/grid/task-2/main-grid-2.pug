@@ -1,0 +1,25 @@
+mixin element(imgSrc, boldText, description)
+  .element-2
+    img(src=imgSrc, alt="")
+    p
+      b.text-bold= boldText
+    p= description
+    button.button-div Lorem ipsum.
+
+main
+  .grid-wrapper
+    .element-1
+      img(src="../../../../content/img/1.jpg", alt="")
+      p
+        b.text-bold Lorem ipsum dolor.
+      p Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      p
+        b.text-bold Lorem ipsum.
+      img(src="../../../../content/img/pexels-veeterzy-38136.jpg", alt="")
+      p Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, velit.
+      p Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, velit.
+      button.button-div Lorem ipsum.
+
+    // Use mixin to generate repeated elements
+    each i in [1, 2, 3, 4, 5]
+      +element("../../../../content/img/1.jpg", "Lorem ipsum dolor.", "Lorem ipsum dolor sit amet consectetur adipisicing elit.")
