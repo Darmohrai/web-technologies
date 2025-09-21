@@ -371,7 +371,7 @@ var App = (function () {
         this.userService = new _services__WEBPACK_IMPORTED_MODULE_1__.UserService();
         this.currentBookToBorrow = null;
         this.currentPage = 1;
-        this.itemsPerPage = 5;
+        this.pageSize = 5;
         this.bindForms();
         this.renderBooks();
         this.bindSearch();
@@ -524,14 +524,12 @@ var App = (function () {
     };
     App.prototype.renderBooks = function (books) {
         var _this = this;
-        if (books === void 0) { books = this.bookService.getAll(); }
         var booksList = document.getElementById("booksList");
         booksList.innerHTML = "";
-        var totalItems = books.length;
-        var totalPages = Math.ceil(totalItems / this.itemsPerPage);
-        var startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        var endIndex = startIndex + this.itemsPerPage;
-        var pageBooks = books.slice(startIndex, endIndex);
+        var allBooks = books !== null && books !== void 0 ? books : this.bookService.getAll();
+        var start = (this.currentPage - 1) * this.pageSize;
+        var end = start + this.pageSize;
+        var pageBooks = allBooks.slice(start, end);
         pageBooks.forEach(function (book) {
             var li = document.createElement("li");
             li.className = "list-group-item d-flex justify-content-between align-items-center";
@@ -551,13 +549,12 @@ var App = (function () {
             deleteBtn.addEventListener("click", function () {
                 _this.bookService.remove(book);
                 _this.renderBooks();
-                _this.notify("\u041A\u043D\u0438\u0433\u0430 \"".concat(book.getTitle(), "\" \u0432\u0438\u0434\u0430\u043B\u0435\u043D\u0430"), "danger");
             });
             btnGroup.appendChild(deleteBtn);
             li.appendChild(btnGroup);
             booksList.appendChild(li);
         });
-        this.renderBookPagination(totalPages);
+        this.renderPagination(allBooks.length);
     };
     App.prototype.renderBookPagination = function (totalPages) {
         var _this = this;
@@ -649,6 +646,51 @@ var App = (function () {
             var modal = new window.bootstrap.Modal(modalEl);
             modal.show();
         }
+    };
+    App.prototype.renderPagination = function (totalItems) {
+        var _this = this;
+        var pagination = document.getElementById("pagination");
+        if (!pagination)
+            return;
+        pagination.innerHTML = "";
+        var totalPages = Math.ceil(totalItems / this.pageSize);
+        var prevLi = document.createElement("li");
+        prevLi.className = "page-item" + (this.currentPage === 1 ? " disabled" : "");
+        prevLi.innerHTML = "<a class=\"page-link\" href=\"#\">\u00AB</a>";
+        prevLi.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (_this.currentPage > 1) {
+                _this.currentPage--;
+                _this.renderBooks();
+            }
+        });
+        pagination.appendChild(prevLi);
+        var _loop_2 = function (i) {
+            var li = document.createElement("li");
+            li.className = "page-item" + (i === this_2.currentPage ? " active" : "");
+            li.innerHTML = "<a class=\"page-link\" href=\"#\">".concat(i, "</a>");
+            li.addEventListener("click", function (e) {
+                e.preventDefault();
+                _this.currentPage = i;
+                _this.renderBooks();
+            });
+            pagination.appendChild(li);
+        };
+        var this_2 = this;
+        for (var i = 1; i <= totalPages; i++) {
+            _loop_2(i);
+        }
+        var nextLi = document.createElement("li");
+        nextLi.className = "page-item" + (this.currentPage === totalPages ? " disabled" : "");
+        nextLi.innerHTML = "<a class=\"page-link\" href=\"#\">\u00BB</a>";
+        nextLi.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (_this.currentPage < totalPages) {
+                _this.currentPage++;
+                _this.renderBooks();
+            }
+        });
+        pagination.appendChild(nextLi);
     };
     return App;
 }());

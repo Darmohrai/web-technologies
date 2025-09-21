@@ -13,6 +13,9 @@ class App {
     private userService = new UserService();
     private currentBookToBorrow: Book | null = null;
 
+    private currentPage: number = 1;
+    private pageSize: number = 5;
+
     constructor() {
         this.bindForms();
         this.renderBooks();
@@ -201,21 +204,16 @@ class App {
         });
     }
 
-    // --- Відображення книг ---
-    private currentPage = 1;
-    private itemsPerPage = 5;
-
-    private renderBooks(books: Book[] = this.bookService.getAll()) {
+    private renderBooks(books?: Book[]) {
         const booksList = document.getElementById("booksList") as HTMLUListElement;
         booksList.innerHTML = "";
 
-        const totalItems = books.length;
-        const totalPages = Math.ceil(totalItems / this.itemsPerPage);
+        const allBooks = books ?? this.bookService.getAll();
 
-        // Вираховуємо книги для поточної сторінки
-        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        const endIndex = startIndex + this.itemsPerPage;
-        const pageBooks = books.slice(startIndex, endIndex);
+        // 🔹 обчислюємо книги для поточної сторінки
+        const start = (this.currentPage - 1) * this.pageSize;
+        const end = start + this.pageSize;
+        const pageBooks = allBooks.slice(start, end);
 
         pageBooks.forEach(book => {
             const li = document.createElement("li");
@@ -225,7 +223,6 @@ class App {
             span.textContent = book.toString();
             li.appendChild(span);
 
-            // кнопки
             const btnGroup = document.createElement("div");
             btnGroup.className = "d-flex";
 
@@ -241,7 +238,6 @@ class App {
             deleteBtn.addEventListener("click", () => {
                 this.bookService.remove(book);
                 this.renderBooks();
-                this.notify(`Книга "${book.getTitle()}" видалена`, "danger");
             });
             btnGroup.appendChild(deleteBtn);
 
@@ -249,8 +245,7 @@ class App {
             booksList.appendChild(li);
         });
 
-        // Рендеримо пагінацію
-        this.renderBookPagination(totalPages);
+        this.renderPagination(allBooks.length);
     }
 
     private renderBookPagination(totalPages: number) {
@@ -360,6 +355,54 @@ class App {
             const modal = new (window as any).bootstrap.Modal(modalEl);
             modal.show();
         }
+    }
+
+    private renderPagination(totalItems: number) {
+        const pagination = document.getElementById("pagination") as HTMLUListElement;
+        if (!pagination) return;
+
+        pagination.innerHTML = "";
+
+        const totalPages = Math.ceil(totalItems / this.pageSize);
+
+        // Кнопка "Попередня"
+        const prevLi = document.createElement("li");
+        prevLi.className = "page-item" + (this.currentPage === 1 ? " disabled" : "");
+        prevLi.innerHTML = `<a class="page-link" href="#">«</a>`;
+        prevLi.addEventListener("click", (e) => {
+            e.preventDefault(); // ❌ відміняємо стандартну поведінку
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.renderBooks();
+            }
+        });
+        pagination.appendChild(prevLi);
+
+        // Номери сторінок
+        for (let i = 1; i <= totalPages; i++) {
+            const li = document.createElement("li");
+            li.className = "page-item" + (i === this.currentPage ? " active" : "");
+            li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+            li.addEventListener("click", (e) => {
+                e.preventDefault(); // ❌ відміняємо стандартну поведінку
+                this.currentPage = i;
+                this.renderBooks();
+            });
+            pagination.appendChild(li);
+        }
+
+        // Кнопка "Наступна"
+        const nextLi = document.createElement("li");
+        nextLi.className = "page-item" + (this.currentPage === totalPages ? " disabled" : "");
+        nextLi.innerHTML = `<a class="page-link" href="#">»</a>`;
+        nextLi.addEventListener("click", (e) => {
+            e.preventDefault(); // ❌ відміняємо стандартну поведінку
+            if (this.currentPage < totalPages) {
+                this.currentPage++;
+                this.renderBooks();
+            }
+        });
+        pagination.appendChild(nextLi);
     }
 
 }
