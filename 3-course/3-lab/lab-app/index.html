@@ -5,19 +5,16 @@
     <title>Система управління бібліотекою</title>
     <link href="libs/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="dist/styles.css">
-    <script src="dist/bundle.js"></script>
 
 </head>
 <body class="bg-light">
 
 <div class="container py-5">
 
-    <!-- Заголовок -->
     <h1 class="text-center mb-5 display-4 fw-bold">
         Система управління бібліотекою
     </h1>
 
-    <!-- Додати книгу -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
             Додати книгу
@@ -46,7 +43,6 @@
         </div>
     </div>
 
-    <!-- Додати користувача -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-secondary text-white">
             Додати користувача
@@ -80,38 +76,29 @@
     </div>
 
 
-    <!-- Список книг -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-dark text-white">
             Список книг
         </div>
         <div class="card-body">
             <ul id="booksList" class="list-group">
-                <!-- Тут динамічно зʼявлятимуться книги -->
             </ul>
-            <!-- Контейнер для пагінації -->
             <ul id="pagination" class="pagination mt-3 justify-content-center"></ul>
         </div>
     </div>
 
 
-    <!-- Список користувачів -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-dark text-white">
             Список користувачів
         </div>
         <div class="card-body">
             <ul id="usersList" class="list-group">
-                <!-- Тут динамічно зʼявлятимуться користувачі -->
             </ul>
         </div>
     </div>
 
 
-    <!-- Контейнер для toast-повідомлень -->
-<!--    <div id="notifications" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>-->
-
-    <!-- Модальне вікно Bootstrap для позичання книги -->
     <div class="modal fade" id="borrowModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content p-3">
@@ -132,7 +119,6 @@
     </div>
 
 
-    <!-- Модальне вікно для повідомлень -->
     <div class="modal fade" id="notificationModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content p-3">
@@ -141,7 +127,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="notificationBody">
-                    <!-- Текст повідомлення з'являється тут -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Зрозуміло</button>

@@ -14,6 +14,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/library.ts":
+/*!************************!*\
+  !*** ./src/library.ts ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Library: () => (/* binding */ Library)
+/* harmony export */ });
+var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+var Library = (function () {
+    function Library() {
+        this.items = [];
+    }
+    Library.prototype.add = function (item) {
+        this.items.push(item);
+    };
+    Library.prototype.remove = function (predicate) {
+        this.items = this.items.filter(function (item) { return !predicate(item); });
+    };
+    Library.prototype.find = function (predicate) {
+        return this.items.find(predicate);
+    };
+    Library.prototype.getAll = function () {
+        return __spreadArray([], this.items, true);
+    };
+    Library.prototype.count = function () {
+        return this.items.length;
+    };
+    return Library;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/models.ts":
 /*!***********************!*\
   !*** ./src/models.ts ***!
@@ -57,8 +102,14 @@ var Book = (function () {
 }());
 
 var User = (function () {
-    function User(name, email) {
-        this.id = User.nextId++;
+    function User(id, name, email) {
+        if (id === null) {
+            this.id = User.nextId++;
+        }
+        else {
+            this.id = id;
+            User.nextId = id + 1;
+        }
         this.name = name;
         this.email = email;
     }
@@ -95,111 +146,114 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   UserService: () => (/* binding */ UserService)
 /* harmony export */ });
 /* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./models */ "./src/models.ts");
-/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./storage */ "./src/storage.ts");
-var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
+/* harmony import */ var _library__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./library */ "./src/library.ts");
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./storage */ "./src/storage.ts");
+
 
 
 var LibraryService = (function () {
     function LibraryService() {
-        this.items = [];
+        this.library = new _library__WEBPACK_IMPORTED_MODULE_1__.Library();
     }
     LibraryService.prototype.add = function (item) {
-        this.items.push(item);
+        this.library.add(item);
     };
     LibraryService.prototype.remove = function (predicate) {
-        this.items = this.items.filter(function (item) { return !predicate(item); });
+        this.library.remove(predicate);
     };
     LibraryService.prototype.find = function (predicate) {
-        return this.items.find(predicate);
+        return this.library.find(predicate);
     };
     LibraryService.prototype.getAll = function () {
-        return __spreadArray([], this.items, true);
+        return this.library.getAll();
     };
     LibraryService.prototype.count = function () {
-        return this.items.length;
+        return this.library.count();
     };
     return LibraryService;
 }());
 
 var BookService = (function () {
     function BookService() {
-        this.storage = new _storage__WEBPACK_IMPORTED_MODULE_1__.IStorage();
-        this.books = [];
+        var _this = this;
+        this.storage = new _storage__WEBPACK_IMPORTED_MODULE_2__.IStorage();
+        this.books = new LibraryService();
         var saved = this.storage.get('books');
         if (saved) {
-            this.books = saved.map(function (b) { return new _models__WEBPACK_IMPORTED_MODULE_0__.Book(b.title, b.author, b.year, b.borrowedById); });
+            saved.forEach(function (b) {
+                return _this.books.add(new _models__WEBPACK_IMPORTED_MODULE_0__.Book(b.title, b.author, b.year, b.borrowedById));
+            });
         }
     }
     BookService.prototype.add = function (book) {
-        this.books.push(book);
+        this.books.add(book);
         this.save();
     };
     BookService.prototype.getAll = function () {
-        return __spreadArray([], this.books, true);
+        return this.books.getAll();
     };
     BookService.prototype.borrow = function (book, userId) {
-        var index = this.books.findIndex(function (b) { return b.getTitle() === book.getTitle() && b.getAuthor() === book.getAuthor() && b.getYear() === book.getYear(); });
-        if (index !== -1) {
-            this.books[index].borrow(userId);
+        var found = this.books.find(function (b) { return b.getTitle() === book.getTitle() &&
+            b.getAuthor() === book.getAuthor() &&
+            b.getYear() === book.getYear(); });
+        if (found) {
+            found.borrow(userId);
             this.save();
         }
     };
     BookService.prototype.returnBook = function (book) {
-        var index = this.books.findIndex(function (b) { return b.getTitle() === book.getTitle() &&
+        var found = this.books.find(function (b) { return b.getTitle() === book.getTitle() &&
             b.getAuthor() === book.getAuthor() &&
             b.getYear() === book.getYear(); });
-        if (index !== -1) {
-            this.books[index].returnBook();
+        if (found) {
+            found.returnBook();
             this.save();
         }
     };
     BookService.prototype.save = function () {
-        this.storage.set('books', this.books);
+        this.storage.set('books', this.books.getAll());
     };
     BookService.prototype.search = function (query) {
         var lowerQuery = query.toLowerCase();
-        return this.books.filter(function (b) {
+        return this.books.getAll().filter(function (b) {
             return b.getTitle().toLowerCase().includes(lowerQuery) ||
                 b.getAuthor().toLowerCase().includes(lowerQuery);
         });
     };
     BookService.prototype.remove = function (book) {
-        this.books = this.books.filter(function (b) { return b !== book; });
-        this.storage.set('books', this.books);
+        this.books.remove(function (b) {
+            return b.getTitle() === book.getTitle() &&
+                b.getAuthor() === book.getAuthor() &&
+                b.getYear() === book.getYear();
+        });
+        this.save();
     };
     return BookService;
 }());
 
 var UserService = (function () {
     function UserService() {
-        this.storage = new _storage__WEBPACK_IMPORTED_MODULE_1__.IStorage();
-        this.users = [];
+        var _this = this;
+        this.storage = new _storage__WEBPACK_IMPORTED_MODULE_2__.IStorage();
+        this.users = new _library__WEBPACK_IMPORTED_MODULE_1__.Library();
         var saved = this.storage.get('users');
         if (saved) {
-            this.users = saved.map(function (u) { return new _models__WEBPACK_IMPORTED_MODULE_0__.User(u.name, u.email); });
+            saved.forEach(function (u) { return _this.users.add(new _models__WEBPACK_IMPORTED_MODULE_0__.User(u.id, u.name, u.email)); });
         }
     }
     UserService.prototype.add = function (user) {
-        this.users.push(user);
+        this.users.add(user);
         this.save();
     };
     UserService.prototype.getAll = function () {
-        return __spreadArray([], this.users, true);
+        return this.users.getAll();
     };
     UserService.prototype.save = function () {
-        this.storage.set('users', this.users);
+        this.storage.set('users', this.users.getAll());
     };
     UserService.prototype.remove = function (user) {
-        this.users = this.users.filter(function (u) { return u !== user; });
-        this.storage.set('users', this.users);
+        this.users.remove(function (u) { return u.getName() === user.getName() && u.getEmail() === user.getEmail(); });
+        this.save();
     };
     return UserService;
 }());
@@ -372,25 +426,12 @@ var App = (function () {
         this.currentBookToBorrow = null;
         this.currentPage = 1;
         this.pageSize = 5;
+        console.log('Initializing... nigga');
         this.bindForms();
         this.renderBooks();
         this.bindSearch();
         this.renderUsers();
     }
-    App.prototype.notify = function (message, type) {
-        if (type === void 0) { type = "info"; }
-        var container = document.getElementById("notifications");
-        var toast = document.createElement("div");
-        toast.className = "toast align-items-center text-white bg-".concat(type, " border-0 mb-2");
-        toast.role = "alert";
-        toast.setAttribute("aria-live", "assertive");
-        toast.setAttribute("aria-atomic", "true");
-        toast.innerHTML = "\n            <div class=\"d-flex\">\n                <div class=\"toast-body\">".concat(message, "</div>\n                <button type=\"button\" class=\"btn-close btn-close-white me-2 m-auto\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n            </div>\n        ");
-        container.appendChild(toast);
-        var bsToast = new window.bootstrap.Toast(toast, { delay: 3000 });
-        bsToast.show();
-        toast.addEventListener('hidden.bs.toast', function () { return toast.remove(); });
-    };
     App.prototype.bindModalButtons = function () {
         var _this = this;
         var confirmBtn = document.getElementById("confirmBorrowBtn");
@@ -425,6 +466,7 @@ var App = (function () {
     };
     App.prototype.handleAddBook = function (event) {
         event.preventDefault();
+        console.log("nigga");
         var titleInput = document.getElementById("bookTitle");
         var authorInput = document.getElementById("bookAuthor");
         var yearInput = document.getElementById("bookYear");
@@ -446,10 +488,16 @@ var App = (function () {
             titleError.textContent = "Назва книги обов'язкова!";
             hasError = true;
         }
+        else {
+            titleInput.classList.add("is-valid");
+        }
         if (!_validation__WEBPACK_IMPORTED_MODULE_2__.Validation.required(author)) {
             authorInput.classList.add("is-invalid");
             authorError.textContent = "Автор обов'язковий!";
             hasError = true;
+        }
+        else {
+            authorInput.classList.add("is-valid");
         }
         if (!_validation__WEBPACK_IMPORTED_MODULE_2__.Validation.required(year)) {
             yearInput.classList.add("is-invalid");
@@ -465,6 +513,9 @@ var App = (function () {
             yearInput.classList.add("is-invalid");
             yearError.textContent = "Введіть коректний рік (1000–2999)!";
             hasError = true;
+        }
+        else {
+            yearInput.classList.add("is-valid");
         }
         if (hasError)
             return;
@@ -503,7 +554,7 @@ var App = (function () {
         }
         if (hasError)
             return;
-        var newUser = new _models__WEBPACK_IMPORTED_MODULE_0__.User(name, email);
+        var newUser = new _models__WEBPACK_IMPORTED_MODULE_0__.User(null, name, email);
         this.userService.add(newUser);
         this.renderUsers();
         event.target.reset();
@@ -556,35 +607,6 @@ var App = (function () {
         });
         this.renderPagination(allBooks.length);
     };
-    App.prototype.renderBookPagination = function (totalPages) {
-        var _this = this;
-        var pagination = document.getElementById("booksPagination");
-        pagination.innerHTML = "";
-        if (totalPages <= 1)
-            return;
-        var nav = document.createElement("nav");
-        var ul = document.createElement("ul");
-        ul.className = "pagination justify-content-center mt-3";
-        var _loop_1 = function (i) {
-            var li = document.createElement("li");
-            li.className = "page-item ".concat(i === this_1.currentPage ? "active" : "");
-            var btn = document.createElement("button");
-            btn.className = "page-link";
-            btn.textContent = i.toString();
-            btn.addEventListener("click", function () {
-                _this.currentPage = i;
-                _this.renderBooks();
-            });
-            li.appendChild(btn);
-            ul.appendChild(li);
-        };
-        var this_1 = this;
-        for (var i = 1; i <= totalPages; i++) {
-            _loop_1(i);
-        }
-        nav.appendChild(ul);
-        pagination.appendChild(nav);
-    };
     App.prototype.renderUsers = function (users) {
         var _this = this;
         var usersList = document.getElementById("usersList");
@@ -616,6 +638,7 @@ var App = (function () {
     };
     App.prototype.bindForms = function () {
         var _this = this;
+        console.log("bindForms викликано");
         var bookForm = document.getElementById("bookForm");
         var userForm = document.getElementById("userForm");
         bookForm.addEventListener("submit", function (e) { return _this.handleAddBook(e); });
@@ -636,7 +659,6 @@ var App = (function () {
             this.bookService.returnBook(book);
             btn.textContent = "Позичити";
             btn.className = "btn btn-sm btn-primary me-2";
-            this.notify("\u041A\u043D\u0438\u0433\u0430 \"".concat(book.getTitle(), "\" \u043F\u043E\u0432\u0435\u0440\u043D\u0435\u043D\u0430"), "info");
         }
         else {
             this.currentBookToBorrow = book;
@@ -665,9 +687,9 @@ var App = (function () {
             }
         });
         pagination.appendChild(prevLi);
-        var _loop_2 = function (i) {
+        var _loop_1 = function (i) {
             var li = document.createElement("li");
-            li.className = "page-item" + (i === this_2.currentPage ? " active" : "");
+            li.className = "page-item" + (i === this_1.currentPage ? " active" : "");
             li.innerHTML = "<a class=\"page-link\" href=\"#\">".concat(i, "</a>");
             li.addEventListener("click", function (e) {
                 e.preventDefault();
@@ -676,9 +698,9 @@ var App = (function () {
             });
             pagination.appendChild(li);
         };
-        var this_2 = this;
+        var this_1 = this;
         for (var i = 1; i <= totalPages; i++) {
-            _loop_2(i);
+            _loop_1(i);
         }
         var nextLi = document.createElement("li");
         nextLi.className = "page-item" + (this.currentPage === totalPages ? " disabled" : "");

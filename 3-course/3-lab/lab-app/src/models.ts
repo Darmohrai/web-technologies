@@ -11,7 +11,7 @@ export class Book implements IBook {
     title: string;
     author: string;
     year: number;
-    borrowedById: number | null = null; // зберігаємо id користувача
+    borrowedById: number | null = null;
 
     constructor(title: string, author: string, year: number, borrowedById: number | null = null) {
         this.title = title;
@@ -52,13 +52,20 @@ export interface IUser {
 }
 
 export class User implements IUser{
-    private static nextId = 1; // статичний лічильник для авто-id
-    private id: number;
+    private static nextId = 1;
+    public id: number;
     public name: string;
     public email: string;
 
-    constructor(name: string, email: string) {
-        this.id = User.nextId++;
+    constructor(id: number | null, name: string, email: string) {
+        if (id === null) {
+            this.id = User.nextId++;
+        }
+        else {
+            this.id = id;
+            User.nextId = id+1;
+        }
+
         this.name = name;
         this.email = email;
     }
